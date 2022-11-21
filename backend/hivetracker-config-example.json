@@ -1,0 +1,14 @@
+{
+    "postgresConfig": {
+        "postgresHost": "",
+        "postgresPort": 5432,
+        "postgresUser": "",
+        "postgresPassword": ""
+    },
+    "mqttConfig": {
+        "mqttHost": "",
+        "mqttPort": 8883,
+        "mqttUser": "",
+        "mqttPassword": ""
+    }
+}
