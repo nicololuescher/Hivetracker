@@ -1,2 +1,31 @@
-<h1 class="text-3xl font-bold underline">Hive Tracker</h1>
-<p>Hello World</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="bg-stone-700 h-screen">
+    <nav class="bg-white border-stone-200 px-2 sm:px-4 py-2.5 dark:bg-stone-900">
+        <div class="container flex flex-wrap items-center justify-between mx-auto">
+            <a href="#" class="flex items-center">
+                <!-- logo -->
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">HiveTracker</span>
+            </a>
+            <div class="md:block md:w-auto" id="navbar-default">
+                <ul
+                    class="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white md:dark:bg-stone-900 dark:border-stone-700">
+                    <li>
+                        <a href="#"
+                            class="hover:bg-amber-600 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-stone-400 md:dark:hover:text-amber-400 dark:hover:bg-stone-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="w-4/5 m-auto mt-5">
+        <router-outlet></router-outlet>
+    </div>
+</body>
+</html>

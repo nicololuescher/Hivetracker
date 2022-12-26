@@ -18,18 +18,18 @@ const options = {
 const client = mqtt.connect(config.mqttConfig.mqttHost, options);
 
 client.on('connect', function () {
-  client.subscribe('hivewatch/#', err => {
+  client.subscribe('hivetracker/#', err => {
     if (err) {
       console.log(err)
     } else {
-      client.publish('hivewatch/events', 'client connected');
+      client.publish('hivetracker/events', 'client connected');
     }
   })
 })
 
 client.on('message', function (topic, message) {
   switch (topic.toString()) {
-    case 'hivewatch/data/temperature':
+    case 'hivetracker/data/temperature':
       if(message.toString() != 'NaN' && message.toString() != null) {
         db.Temperature.create({
           temperature: message.toString(),
@@ -38,7 +38,7 @@ client.on('message', function (topic, message) {
       }
       break;
 
-    case 'hivewatch/data/weight':
+    case 'hivetracker/data/weight':
       if(!isNaN(message.toString()) && message.toString() != null) {
         db.Weight.create({
           weight: message.toString(),
@@ -47,7 +47,7 @@ client.on('message', function (topic, message) {
       }
       break;
 
-    case 'hivewatch/events':
+    case 'hivetracker/events':
       console.log(message.toString());
       break;
 
@@ -63,6 +63,7 @@ client.on('error', function (err) {
 });
 
 router.get('/', async function (req, res, next) {
+  console.log("test");
   let data = {
     temperature: await db.Temperature.findAll(),
     weight: await db.Weight.findAll()
