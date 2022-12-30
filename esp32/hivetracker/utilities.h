@@ -1,5 +1,7 @@
 #include <Wire.h>
 
+#define SIM800L_IP5306_VERSION_20190610
+
 #if defined(SIM800L_IP5306_VERSION_20190610)
 
 #define MODEM_RST             5
