@@ -2,100 +2,88 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include "HX711.h"
+#include <PubSubClient.h>
 
-// Select your modem:
+// modem model
 #define TINY_GSM_MODEM_SIM800
+// must be included AFTER modem definition!!
+#include <TinyGsmClient.h>
 
-// Set serial for debug console (to the Serial Monitor, default speed 115200)
+// serial debugger
 #define SerialMon Serial
 
-// Set serial for AT commands (to the module)
-// Use Hardware Serial on Mega, Leonardo, Micro
+// serial for at commands
 #define SerialAT Serial1
 
-// See all AT commands, if wanted
-//#define DUMP_AT_COMMANDS
-
-// Define the serial console for debug prints, if needed
+// debug console for gsm client
 #define TINY_GSM_DEBUG SerialMon
 
-// Add a reception delay - may be needed for a fast processor at a slow baud rate
-// #define TINY_GSM_YIELD() { delay(2); }
-
-// Define how you're planning to connect to the internet
+// connect via GPRS
 #define TINY_GSM_USE_GPRS true
 
-// set GSM PIN, if any
+// sim pin
 #define GSM_PIN "2827"
 
-// Your GPRS credentials, if any
+// gprs credentials for digitec iot
 const char apn[] = "internet";
 const char gprsUser[] = "internet";
 const char gprsPass[] = "guest";
 
-// MQTT details
+// mqtt broker
 const char *broker = "mqtt.nicolo.info";
+const char *mqttUser = "guest";
+const char *mqttPassword = "gibbiX12345";
 
-#include <TinyGsmClient.h>
-#include <PubSubClient.h>
+// configuration
+const int baudRate = 115200;
+const int timeout = 10000;
+const float scaleFactor = -3.3707142857142857142857142857143;
+const int numerOfMeasurements = 10;
 
+// temperature sensor setup
 const int oneWireBus = 19;
 OneWire oneWire(oneWireBus);
 DallasTemperature sensors(&oneWire);
 
+// load cell setup
 const int LOADCELL_DOUT = 2;
 const int LOADCELL_SCK = 18;
-
 HX711 cell;
 
-#ifdef DUMP_AT_COMMANDS
-#include <StreamDebugger.h>
-StreamDebugger debugger(SerialAT, SerialMon);
-TinyGsm modem(debugger);
-#else
+// create gprs modem
 TinyGsm modem(SerialAT);
-#endif
+
+// create client from modem
 TinyGsmClient client(modem);
+
+// pass client to mqtt
 PubSubClient mqtt(client);
 
-int ledStatus = LOW;
-
-uint32_t lastReconnectAttempt = 0;
-
-void mqttCallback(char *topic, byte *payload, unsigned int len)
-{
-  SerialMon.print("Message arrived [");
-  SerialMon.print(topic);
-  SerialMon.print("]: ");
-  SerialMon.write(payload, len);
-  SerialMon.println();
-}
-
+// connect to mqtt
 boolean mqttConnect()
 {
   SerialMon.print("Connecting to ");
   SerialMon.print(broker);
 
-  boolean status = mqtt.connect("GsmClientName", "guest", "gibbiX12345");
+  boolean status = mqtt.connect("GsmClientName", mqttUser, mqttPassword);
 
   if (status == false) {
     SerialMon.println(" fail");
     return false;
   }
   SerialMon.println(" success");
-  mqtt.publish("test", "GsmClientTest started");
-  mqtt.subscribe("test");
+  mqtt.publish("hivetracker/events", "Scale Connected");
   return mqtt.connected();
 }
-
 
 void setup()
 {
   // Set console baud rate
-  SerialMon.begin(115200);
+  SerialMon.begin(baudRate);
 
   delay(10);
 
+  // initialize all components
   setupGSM();
   setupMQTT();
   setupTemp();
@@ -104,118 +92,127 @@ void setup()
 
 void loop()
 {
+  // get measurement
   float wgt = getWgt();
   float temp = getTemp();
-  // GPRS connection parameters are usually set after network registration
-  SerialMon.print(F("Connecting to "));
-  SerialMon.print(apn);
-  if (!modem.gprsConnect(apn, gprsUser, gprsPass)) {
-    SerialMon.println(" fail");
-    delay(10000);
-    return;
-  }
-  SerialMon.println(" success");
 
-  if (modem.isGprsConnected()) {
-    SerialMon.println("GPRS connected 2");
+  // reconnect gprs if disconnected
+  if(!modem.isGprsConnected()){
+    connectGPRS();  
   }
+
+  // reconnect mqtt if disconnected
   if (!mqtt.connected()) {
-    SerialMon.println("=== MQTT NOT CONNECTED ===");
-    // Reconnect every 10 seconds
-    uint32_t t = millis();
-    if (t - lastReconnectAttempt > 10000L) {
-      lastReconnectAttempt = t;
-      if (mqttConnect()) {
-        lastReconnectAttempt = 0;
-      }
+    SerialMon.println("Connecting to MQTT broker");
+
+    while(!mqttConnect()){
+      delay(10000);
     }
-    delay(100);
-    mqtt.publish("temp", ((String)temp).c_str());
-    mqtt.publish("wgt", ((String)wgt).c_str());
-    return;
   }
 
-  SerialMon.println(getTemp());
+  // publish measurement
+  mqtt.publish("hivetracker/temperature", ((String)temp).c_str());
+  mqtt.publish("hivetracker/weight", ((String)wgt).c_str());
 
-  delay(10000);
+  SerialMon.print("Publishing Temperature: ");
+  SerialMon.println(temp);
+  SerialMon.print("Publishing Weight: ");
+  SerialMon.println(wgt);
+
+  SerialMon.print("Sleeping for ");
+  SerialMon.print(timeout / 1000);
+  SerialMon.println(" seconds");
+  delay(timeout);
 }
 
 void setupGSM() {
-
+  SerialMon.println("Setting up GSM");
   setupModem();
-
   SerialMon.println("Wait...");
 
-  // Set GSM module baud rate and UART pins
-  SerialAT.begin(115200, SERIAL_8N1, MODEM_RX, MODEM_TX);
+  // set GSM module baud rate and UART pins
+  SerialAT.begin(baudRate, SERIAL_8N1, MODEM_RX, MODEM_TX);
 
   delay(6000);
 
-  // Restart takes quite some time
-  // To skip it, call init() instead of restart()
+  // initialize modem
   SerialMon.println("Initializing modem...");
   modem.restart();
-  // modem.init();
 
+  // print out modem info
   String modemInfo = modem.getModemInfo();
   SerialMon.print("Modem Info: ");
   SerialMon.println(modemInfo);
 
-#if TINY_GSM_USE_GPRS
-  // Unlock your SIM card with a PIN if needed
+  // unlock sim
   if ( GSM_PIN && modem.getSimStatus() != 3 ) {
     modem.simUnlock(GSM_PIN);
   }
-#endif
 
+  // wait for network
   SerialMon.print("Waiting for network...");
   if (!modem.waitForNetwork()) {
     SerialMon.println(" fail");
     delay(10000);
-    return;
+    setupGSM();
   }
   SerialMon.println(" success");
 
   if (modem.isNetworkConnected()) {
     SerialMon.println("Network connected");
   }
+  connectGPRS();
+}
 
-    // GPRS connection parameters are usually set after network registration
+// connect to GPRS
+void connectGPRS(){
+  // GPRS connection parameters are usually set after network registration
   SerialMon.print(F("Connecting to "));
   SerialMon.print(apn);
+  // retry connection after 10 seconds if unable to connect
   if (!modem.gprsConnect(apn, gprsUser, gprsPass)) {
     SerialMon.println(" fail");
     delay(10000);
-    return;
+    connectGPRS();
   }
   SerialMon.println(" success");
 
   if (modem.isGprsConnected()) {
-    SerialMon.println("GPRS connected 1");
+    SerialMon.println("GPRS connected");
   }
 }
 
+// setup mqtt
 void setupMQTT(){
   mqtt.setServer(broker, 1883);
-  mqtt.setCallback(mqttCallback);
 }
 
+// setup temperature
 void setupTemp(){
   sensors.begin();
 }
 
+// read temperature
 float getTemp(){
+  // prepare data
   sensors.requestTemperatures();
+
+  // read from index 0
   return sensors.getTempCByIndex(0);
 }
 
+// setup weight
 void setupWgt(){
+  // start cell with given ports
   cell.begin(LOADCELL_DOUT, LOADCELL_SCK);
-  cell.set_scale(-0.3468);
-  //cell.tare();
+  // configure scale
+  cell.set_scale(scaleFactor);
+  // zero scale
+  cell.tare();
 }
 
-
+// read weight
 float getWgt(){
-  return cell.get_units(10);
+  // read weight n times and return average
+  return cell.get_units(numerOfMeasurements);
 }
