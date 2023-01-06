@@ -62,13 +62,51 @@ client.on('error', function (err) {
   client.end();
 });
 
-router.get('/', async function (req, res, next) {
-  console.log("test");
+router.get('/getData', async function (req, res, next) {
   let data = {
     temperature: await db.Temperature.findAll(),
     weight: await db.Weight.findAll()
   }
   res.json(data);
+});
+
+router.get('/getHives', async function (req, res, next){
+  let data = await db.Hives.findAll();
+  res.json(data);
+});
+
+router.post('/setOffset', async function (req, res, next){
+  console.log('Got body:', req.body);
+  db.Hives.update({
+    hiveWeightOffset: req.body.offset
+  }, {
+    where: {
+      id: req.body.id
+    }
+  })
+  .then(result => {
+    res.send(result);
+  })
+  .catch(err => {
+    res.send(err);
+  });
+});
+
+router.post('/setScale', async function (req, res, next){
+  console.log('Got body:', req.body);
+  db.Hives.update({
+    hiveWeightCallibrationFactor: req.body.scale
+  }, {
+    where: {
+      id: req.body.id
+    }
+  })
+  .then(result => {
+    res.send(result);
+  })
+  .catch(err => {
+    res.send(err);
+  });
 });
 
 module.exports = router;

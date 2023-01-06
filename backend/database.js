@@ -25,6 +25,14 @@ const Hives = sequelize.define('Hives', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    hiveWeightOffset: {
+        type: Sequelize.FLOAT,
+        allowNull: true
+    },
+    hiveWeightCallibrationFactor: {
+        type: Sequelize.FLOAT,
+        allowNull: true
+    }
 });
 
 const Temperature = sequelize.define('Temperature', {

@@ -36,9 +36,9 @@ const char *mqttPassword = "gibbiX12345";
 
 // configuration
 const int baudRate = 115200;
-const int timeout = 10000;
+const int timeout = 60; // in seconds
 const float scaleFactor = -3.3707142857142857142857142857143;
-const int numerOfMeasurements = 10;
+const int numerOfMeasurements = 20;
 
 // temperature sensor setup
 const int oneWireBus = 19;
@@ -65,14 +65,14 @@ boolean mqttConnect()
   SerialMon.print("Connecting to ");
   SerialMon.print(broker);
 
-  boolean status = mqtt.connect("GsmClientName", mqttUser, mqttPassword);
+  boolean status = mqtt.connect("GsmClientName", mqttUser, mqttPassword, "hivetracker/events", 0, 1, "Scale Timeout");
 
   if (status == false) {
     SerialMon.println(" fail");
     return false;
   }
   SerialMon.println(" success");
-  mqtt.publish("hivetracker/events", "Scale Connected");
+  mqtt.publish("hivetracker/events", "Scale Connected", true);
   return mqtt.connected();
 }
 
@@ -88,11 +88,8 @@ void setup()
   setupMQTT();
   setupTemp();
   setupWgt();
-}
 
-void loop()
-{
-  // get measurement
+    // get measurement
   float wgt = getWgt();
   float temp = getTemp();
 
@@ -111,19 +108,36 @@ void loop()
   }
 
   // publish measurement
-  mqtt.publish("hivetracker/temperature", ((String)temp).c_str());
-  mqtt.publish("hivetracker/weight", ((String)wgt).c_str());
+  mqtt.publish("hivetracker/data/temperature", ((String)temp).c_str(), true);
+  mqtt.publish("hivetracker/data/weight", ((String)wgt).c_str(), true);
 
   SerialMon.print("Publishing Temperature: ");
   SerialMon.println(temp);
   SerialMon.print("Publishing Weight: ");
   SerialMon.println(wgt);
 
+  mqtt.publish("hivetracker/events", "Scale Disconnected", true);
+
+  //making sure data has time to be published
+  delay(500);
+
+  mqtt.disconnect();
+  delay(500);
+
   SerialMon.print("Sleeping for ");
-  SerialMon.print(timeout / 1000);
+  SerialMon.print(timeout);
   SerialMon.println(" seconds");
-  delay(timeout);
+
+  // set wakeup time
+  esp_sleep_enable_timer_wakeup(timeout * 1000 * 1000); // seconds * millis * nanos
+  // flush serial monitor
+  SerialMon.flush();
+  // go to sleep
+  esp_deep_sleep_start();
 }
+
+void loop()
+{}
 
 void setupGSM() {
   SerialMon.println("Setting up GSM");
@@ -207,8 +221,6 @@ void setupWgt(){
   cell.begin(LOADCELL_DOUT, LOADCELL_SCK);
   // configure scale
   cell.set_scale(scaleFactor);
-  // zero scale
-  cell.tare();
 }
 
 // read weight

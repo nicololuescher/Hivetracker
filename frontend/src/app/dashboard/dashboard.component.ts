@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js/auto';
-import { Interval } from 'chart.js/dist/scales/scale.time';
 import 'chartjs-adapter-moment';
 import { HivedataService } from '../hivedata.service';
 Chart.register(...registerables)
@@ -11,69 +10,90 @@ Chart.register(...registerables)
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  chart: Chart | null;
+  tempChart: Chart | null;
+  weightChart: Chart | null;
   sets: any;
+  chartOptions: object;
 
   constructor(private _HiveDataService: HivedataService) {
-    this.chart = null;
+    this.tempChart = null;
+    this.weightChart = null;
     this.sets = [];
+    this.chartOptions = {
+      scales: {
+        x: {
+          type: 'time'
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+          displayColors: false
+        }
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: false
+      },
+      maintainAspectRatio: false,
+      animation: false
+    }
   }
 
   async ngOnInit(): Promise<void> {
     Chart.defaults.color = "#fff";
     this.createChart(await this.fetchData());
     setInterval(async () => {
-        this.updateChart(await this.fetchData());
-    }, 1000);
+      this.updateChart(await this.fetchData());
+    }, 10000);
   }
 
   fetchData(): any {
     return new Promise((resolve) => {
-      let sets: any = [];
       this._HiveDataService.getHiveData().subscribe((data: any) => {
-        let set: any = { data: [], label: 'Temperature' };
+
+        let tempSet: any = { data: [], label: 'Temperature', borderColor: '#fbbf24' };
         data.temperature.forEach((element: any) => {
-          set.data.push({ x: element.createdAt, y: element.temperature });
+          tempSet.data.push({ x: element.createdAt, y: element.temperature });
         });
-        sets.push(set);
-        set = { data: [], label: 'Weight' };
+        let weightSet: any = { data: [], label: 'Weight', borderColor: '#fbbf24' };
         data.weight.forEach((element: any) => {
-          set.data.push({ x: element.createdAt, y: element.weight / 1000 });
+          weightSet.data.push({ x: element.createdAt, y: element.weight / 1000 });
         });
-        sets.push(set);
-        this.sets = sets;
-        resolve(sets);
+        this.sets = { temperature: tempSet, weight: weightSet };
+        resolve({ temperature: tempSet, weight: weightSet });
       });
     });
   }
 
   createChart(sets: any): void {
-    this.chart = new Chart("chart", {
+    this.tempChart = new Chart("tempChart", {
       type: 'line',
-      options: {
-        scales: {
-          x: {
-            type: 'time'
-          }
-        },
-        animations: {
-          y: {
-            duration: 0
-          }
-        }
-      },
+      options: this.chartOptions,
       data: {
-        datasets: sets
+        datasets: [sets.temperature]
+      }
+    });
+
+    this.weightChart = new Chart("weightChart", {
+      type: 'line',
+      options: this.chartOptions,
+      data: {
+        datasets: [sets.weight]
       }
     });
   }
 
   updateChart(sets: any): void {
-    if (this.chart) {
-      console.log();
-      if(this.chart.data.datasets[0].data.length == sets[0].data.length) return;
-      this.chart.data.datasets = sets;
-      this.chart.update();
+    if (this.tempChart && this.weightChart) {
+      this.tempChart.data.datasets = [sets.temperature];
+      this.tempChart.update();
+      this.weightChart.data.datasets = [sets.weight];
+      this.weightChart.update()
     }
   }
 

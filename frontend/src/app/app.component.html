@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body class="bg-stone-700 h-screen">
-    <nav class="bg-white border-stone-200 px-2 sm:px-4 py-2.5 dark:bg-stone-900">
+<body class="bg-stone-700 h-screen flex flex-col">
+    <nav class="bg-white border-stone-200 px-2 sm:px-4 py-2.5 dark:bg-stone-900 flex">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
             <a href="#" class="flex items-center">
                 <!-- logo -->
@@ -24,7 +24,7 @@
             </div>
         </div>
     </nav>
-    <div class="w-4/5 m-auto mt-5">
+    <div class="w-4/5 flex-1 m-auto">
         <router-outlet></router-outlet>
     </div>
 </body>
