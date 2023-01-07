@@ -63,9 +63,15 @@ client.on('error', function (err) {
 });
 
 router.get('/getData', async function (req, res, next) {
-  let data = {
-    temperature: await db.Temperature.findAll(),
-    weight: await db.Weight.findAll()
+  temperature = await db.Temperature.findAll();
+  weight = await db.Weight.findAll();
+  let hive = await db.Hives.findAll({where: {id: 1}});
+  weight.forEach(element => {
+    element.weight = (element.weight - hive[0].hiveWeightOffset) * hive[0].hiveWeightCallibrationFactor;
+  })
+  data = {
+    temperature: temperature,
+    weight: weight
   }
   res.json(data);
 });
@@ -76,26 +82,50 @@ router.get('/getHives', async function (req, res, next){
 });
 
 router.post('/setOffset', async function (req, res, next){
-  console.log('Got body:', req.body);
-  db.Hives.update({
-    hiveWeightOffset: req.body.offset
-  }, {
+  await db.Weight.findAll({
     where: {
-      id: req.body.id
-    }
+      hiveId: req.body.id
+    },
+    limit: 1,
+    order: [['createdAt', 'DESC']]
+  }).then((offset) => {
+    console.log(offset[0].weight);
+    db.Hives.update({
+      hiveWeightOffset: offset[0].weight
+    }, {
+      where: {
+        id: req.body.id
+      }
+    })
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      res.send(err);
+    });
   })
-  .then(result => {
-    res.send(result);
-  })
-  .catch(err => {
-    res.send(err);
-  });
+
 });
 
 router.post('/setScale', async function (req, res, next){
   console.log('Got body:', req.body);
+  hive = await db.Hives.findAll({where: {id: req.body.id}});
+  offset = hive[0].hiveWeightOffset;
+
+  latestWeight = await db.Weight.findAll({
+    where: {
+      hiveId: req.body.id
+    },
+    limit: 1,
+    order: [['createdAt', 'DESC']]
+  });
+  latestWeight = latestWeight[0].weight - offset;
+
+  console.log(latestWeight);
+  console.log(req.body.trueWeight);
+
   db.Hives.update({
-    hiveWeightCallibrationFactor: req.body.scale
+    hiveWeightCallibrationFactor: req.body.trueWeight / latestWeight
   }, {
     where: {
       id: req.body.id

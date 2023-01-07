@@ -38,7 +38,7 @@ const char *mqttPassword = "gibbiX12345";
 const int baudRate = 115200;
 const int timeout = 60; // in seconds
 const float scaleFactor = -3.3707142857142857142857142857143;
-const int numerOfMeasurements = 20;
+const int numerOfMeasurements = 10;
 
 // temperature sensor setup
 const int oneWireBus = 19;

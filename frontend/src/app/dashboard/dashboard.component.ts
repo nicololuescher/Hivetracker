@@ -47,6 +47,8 @@ export class DashboardComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     Chart.defaults.color = "#fff";
     this.createChart(await this.fetchData());
+    console.log(this.updateChart);
+
     setInterval(async () => {
       this.updateChart(await this.fetchData());
     }, 10000);
@@ -97,4 +99,21 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  zeroScale(): void {
+    this._HiveDataService.setOffset(1).subscribe((data: any) => { });
+  }
+
+  setScale(): void {
+    let input: HTMLInputElement = document.getElementById("trueWeight") as HTMLInputElement;
+
+    if (input.value != "") {
+      this._HiveDataService.setScale(1, Number(input.value)).subscribe((data: any) => {
+        this.fetchData()
+          .then((sets: any) => {
+            this.updateChart(sets);
+          });
+      });
+
+    }
+  }
 }
