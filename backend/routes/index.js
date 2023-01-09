@@ -89,7 +89,6 @@ router.post('/setOffset', async function (req, res, next){
     limit: 1,
     order: [['createdAt', 'DESC']]
   }).then((offset) => {
-    console.log(offset[0].weight);
     db.Hives.update({
       hiveWeightOffset: offset[0].weight
     }, {

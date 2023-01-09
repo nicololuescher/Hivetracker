@@ -36,7 +36,7 @@ const char *mqttPassword = "gibbiX12345";
 
 // configuration
 const int baudRate = 115200;
-const int timeout = 60; // in seconds
+const int timeout = 1; // in seconds
 const float scaleFactor = -3.3707142857142857142857142857143;
 const int numerOfMeasurements = 10;
 

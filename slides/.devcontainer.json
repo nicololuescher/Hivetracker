@@ -1,0 +1,12 @@
+{
+    "name": "Project 2",
+    "image": "registry.gitlab.ti.bfh.ch/bfh-latex/registry/vscode:2.1.4",
+ 
+    "extensions": [
+        "james-yu.latex-workshop",
+        "ban.spellright",
+        "valentjn.vscode-ltex"
+    ],
+ 
+    "remoteUser": "vscode"
+ }

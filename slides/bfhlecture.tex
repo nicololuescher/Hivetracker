@@ -1,0 +1,231 @@
+% ====================
+% Preamble
+% ====================
+\documentclass[
+  10pt,
+  %% -- feed over latexmk see readme
+  english,
+]{bfhbeamer}
+
+% Include Packages
+\usepackage[french,ngerman,english]{babel}  % https://www.namsu.de/Extra/pa
+
+\useoutertheme{BFH-sidebar}
+
+% Der folgende Block ist nur bei pdfTeX auf Versionen vor April 2018 notwendig
+\usepackage{iftex}
+\ifPDFTeX
+\usepackage[utf8]{inputenc} %kompatibilität mit TeX Versionen vor April 2018
+\fi
+
+%Activate the output of a frame number:
+\setbeamertemplate{page number in head/foot}[framenumber]
+\setbeamertemplate{section page}[true]
+\setbeamertemplate{lecture page}[true]
+
+%% %---------------------------------------------------------------------------
+%% % Documents paths
+%% %---------------------------------------------------------------------------
+%% \makeatletter
+%% \def\input@path{{lectures/}}
+%% %or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
+%% \makeatother
+%---------------------------------------------------------------------------
+% Graphics paths
+%---------------------------------------------------------------------------
+\graphicspath{{lectures/}{pictures/}{figures/}}
+%---------------------------------------------------------------------------
+
+\LoadBFHModule{tabular,rules}
+
+\usepackage{caption}
+
+\usepackage{variables}
+
+%---------------------------------------------------------------------------
+\subtitle{Some sub title\\Hello World}
+
+\lecture[SAMPLE]{\LaTeX Sample Lecture}{sample-lecture-label}
+
+\version{1.0.0}
+
+% ====================
+% Body
+% ====================
+
+\begin{document}
+
+%%%---------------------------------------
+\begin{frame}[plain]
+ \setbeamertemplate{title page}[BFH-graphic]
+ \maketitle
+\end{frame}
+%%%---------------------------------------
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+%%%---------------------------------------
+\begin{frame}[plain]
+  \setbeamertemplate{title page}[BFH-Orange]
+  \maketitle
+\end{frame}
+%%%---------------------------------------
+\section{Some Section Title}
+%%%---------------------------------------
+\begin{frame} \frametitle{Some Slide Title}
+  \framesubtitle{Examine some basic code. Take a look at the (very) basic program below to get a good idea about how some of the various aspects of the language work together, and to get an idea of how programs function.}
+  \only<2>{
+  \begin{itemize}
+    \item The \texttt{\#include} command occurs before the program starts, and loads libraries that contain the functions you need. In this example, \texttt{stdio.h} lets us use the \texttt{printf()} and \texttt{getchar()} functions.
+    \item The \texttt{int main()} command tells the compiler that the program is running the function called ``main'' and that it will return an integer when it is finished. All-most all C programs run a ``main'' function.
+    \item The \texttt{\{\}} indicate that everything inside them is part of the function. In this case, they denote that everything inside is a part of the ``main'' function.
+    \item The \texttt{printf()} function displays the contents of the parentheses on the user's screen. The quotes ensure that the string inside is printed literally. The \textbackslash~n sequence tells the compiler to move the cursor to the next line.
+  \end{itemize}
+  }
+  \only<3-|handout:0>{
+  \begin{itemize}
+    \item The ``;'' denotes the end of a line. Most lines of C code need to end with a semicolon.
+    \item The \texttt{getchar()} command tells the compiler to wait for a keystroke input before moving on. This is useful because many compilers will run the program and immediately close the window. This keeps the program from finishing until a key is pressed.
+    \item The \texttt{return 0 } command indicates the end of the function. This means that it will need an integer to be returned once the program is finished.\footnote{A ``0'' indicates that the program has performed correctly; any other number will mean that the program ran into an error.}
+  \end{itemize}
+  }
+\end{frame}
+\note{
+ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet, purus ut sagittis dignissim, risus est elementum tellus, et fringilla tortor tortor quis est. Etiam vel dictum lacus. Nullam nec convallis risus. Duis mattis scelerisque risus a egestas. Nullam suscipit finibus tellus, nec fringilla turpis malesuada quis. Duis et laoreet massa. Nullam dictum diam quis justo viverra, ut feugiat sem iaculis. Duis ultricies elit eget efficitur bibendum. Nulla eget vestibulum urna, a ullamcorper sem. Nulla facilisi. Vivamus id pulvinar enim. Etiam aliquam velit non varius posuere. Nulla sed massa at erat laoreet dapibus. Sed venenatis diam at est finibus, non vulputate sapien laoreet. 
+}
+%%%---------------------------------------
+\subsection[Short Sub-Title]{A very very very heavy exercise }
+%%%---------------------------------------
+\begin{frame}
+  \begin{block}{Exercise}
+    Some meaningful exercise!! 
+  \end{block}
+  \noindent
+  \textbf{Solution.}\nopagebreak\vspace{2in}
+\end{frame}
+%%%---------------------------------------
+\section{An other section}
+\sectionpage
+%%%---------------------------------------
+\begin{frame}\frametitle{The box env }
+    \begin{block}{Blocktitel}
+        Blocktext
+    \end{block}
+    \begin{exampleblock}{Beispielblocktitel}
+        Beispielblocktext
+    \end{exampleblock}
+    \begin{alertblock}{Warnungsblocktitel}
+        Warnungsblocktext
+    \end{alertblock}
+\end{frame}
+\note{
+ Proin maximus dignissim pretium. Suspendisse fringilla, velit id tincidunt interdum, justo justo dictum leo, faucibus sodales felis neque non neque. Quisque at euismod nisi. Phasellus molestie enim non ipsum consectetur porta. Nam ex orci, finibus eu tincidunt eu, hendrerit a dui. Aenean non elit porttitor, dictum ligula ut, vulputate purus. Nam malesuada dapibus odio sed mattis. Proin viverra mauris eget lobortis feugiat. In sed metus sed quam tristique semper.   
+
+}
+%%%---------------------------------------
+\begin{frame}\frametitle{Shell examples}
+  \begin{itemize}
+    \item An ordinary user shell command.
+    \item A command on a \alert{root shell}.
+    \item A user shell where a command with super user perm.
+  \end{itemize}
+\end{frame}
+\note{
+ Proin maximus dignissim pretium. Suspendisse fringilla, velit id tincidunt interdum, justo justo dictum leo, faucibus sodales felis neque non neque. Quisque at euismod nisi. Phasellus molestie enim non ipsum consectetur porta. Nam ex orci, finibus eu tincidunt eu, hendrerit a dui. Aenean non elit porttitor, dictum ligula ut, vulputate purus. Nam malesuada dapibus odio sed mattis. Proin viverra mauris eget lobortis feugiat. In sed metus sed quam tristique semper. 
+}
+%%%---------------------------------------
+\begin{frame}\frametitle{A Theorem on Infinite Sets}
+  \begin{theorem}<1->
+    There exists an infinite set.
+  \end{theorem}
+  \begin{proof}<2->
+    This follows from the axiom of infinity.
+  \end{proof}
+  \begin{example}<3->[Natural Numbers]
+    The set of natural numbers is infinite.
+  \end{example}
+\end{frame}
+%%%---------------------------------------
+\begin{frame}
+  \frametitle{Some BFH table}
+  
+  \begin{table}[ht]
+   \centering
+   \colorlet{BFH-table}{BFH-MediumBlue!10}
+   \colorlet{BFH-tablehead}{BFH-MediumBlue!50}
+   \begin{bfhTabular}{lll}
+   Header 1 &Header 2 &Header 3 \\
+   \hline
+   Content 11&Content 12 & Content 13 \\
+   Content 21&Content 22 & Content 23
+   \end{bfhTabular}
+   \captionsetup{width=.6\linewidth}
+   \caption{Anzahl Personen, ausländischer Bevölkerungsanteil und Arbeitslosenquote pro
+	Stadtteil Ende 2005 (Statistikdienste der Stadt Bern, 2006)}
+%   \caption*{Anzahl Personen, ausländischer Bevölkerungsanteil und Arbeitslosenquote pro
+%	Stadtteil Ende 2005 (Statistikdienste der Stadt Bern, 2006)}
+   \label{tab:tab1}
+\end{table}
+
+\end{frame}
+%%%---------------------------------------
+\section{An other section}
+\sectionpage
+%%%---------------------------------------
+\begin{frame}\frametitle{The box env }
+    \begin{block}{Blocktitel}
+        Blocktext
+    \end{block}
+    \begin{exampleblock}{Beispielblocktitel}
+        Beispielblocktext
+    \end{exampleblock}
+    \begin{alertblock}{Warnungsblocktitel}
+        Warnungsblocktext
+    \end{alertblock}
+\end{frame}
+\note{
+ Fusce interdum fringilla euismod. Suspendisse non mauris a ligula varius tincidunt ut non eros. Pellentesque at mauris sed nisl semper porta varius quis sem. Maecenas eget fringilla lorem. Nam neque mauris, ultricies vitae sem vitae, volutpat dictum nunc. Etiam vel laoreet neque, sed cursus diam. Integer finibus lacus justo, pulvinar posuere eros volutpat id. Etiam eget interdum lorem. Pellentesque aliquam erat rhoncus dolor rutrum molestie. 
+}
+%%%---------------------------------------
+\begin{frame}\frametitle{Shell examples}
+  \begin{itemize}
+    \item An ordinary user shell command.
+    \item A command on a root shell.
+    \item A user shell where a command with super user perm.
+  \end{itemize}
+\end{frame}
+\note{
+ Fusce interdum fringilla euismod. Suspendisse non mauris a ligula varius tincidunt ut non eros. Pellentesque at mauris sed nisl semper porta varius quis sem. Maecenas eget fringilla lorem. Nam neque mauris, ultricies vitae sem vitae, volutpat dictum nunc. Etiam vel laoreet neque, sed cursus diam. Integer finibus lacus justo, pulvinar posuere eros volutpat id. Etiam eget interdum lorem. Pellentesque aliquam erat rhoncus dolor rutrum molestie. 
+}
+%%%---------------------------------------
+\section{An other section}
+\sectionpage
+%%%---------------------------------------
+\begin{frame}\frametitle{The box env }
+    \begin{block}{Blocktitel}
+        Blocktext
+    \end{block}
+    \begin{exampleblock}{Beispielblocktitel}
+        Beispielblocktext
+    \end{exampleblock}
+    \begin{alertblock}{Warnungsblocktitel}
+        Warnungsblocktext
+    \end{alertblock}
+\end{frame}
+\note{
+ Fusce interdum fringilla euismod. Suspendisse non mauris a ligula varius tincidunt ut non eros. Pellentesque at mauris sed nisl semper porta varius quis sem. Maecenas eget fringilla lorem. Nam neque mauris, ultricies vitae sem vitae, volutpat dictum nunc. Etiam vel laoreet neque, sed cursus diam. Integer finibus lacus justo, pulvinar posuere eros volutpat id. Etiam eget interdum lorem. Pellentesque aliquam erat rhoncus dolor rutrum molestie. 
+}
+%%%---------------------------------------
+\begin{frame}\frametitle{Shell examples}
+  \begin{itemize}
+    \item An ordinary user shell command.
+    \item A command on a root shell.
+    \item A user shell where a command with super user perm.
+  \end{itemize}
+\end{frame}
+\note{
+ Fusce interdum fringilla euismod. Suspendisse non mauris a ligula varius tincidunt ut non eros. Pellentesque at mauris sed nisl semper porta varius quis sem. Maecenas eget fringilla lorem. Nam neque mauris, ultricies vitae sem vitae, volutpat dictum nunc. Etiam vel laoreet neque, sed cursus diam. Integer finibus lacus justo, pulvinar posuere eros volutpat id. Etiam eget interdum lorem. Pellentesque aliquam erat rhoncus dolor rutrum molestie. 
+}
+%%%---------------------------------------
+
+\end{document}
