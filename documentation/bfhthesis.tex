@@ -11,7 +11,7 @@
   listof=totoc,         % If enabled add lists to TOC
   monolingual,
 % bilingual,
-  invert-title,
+% invert-title,
 ]{bfhthesis}
 
 \LoadBFHModule{listings,terminal,boxes}
@@ -137,7 +137,7 @@
 \department{Technik und Informatik}
 \institute{Computer Sciences}
 \version{0.1}
-\titlegraphic*{\includegraphics{somePicture}}
+\titlegraphic*{\includegraphics{bee}}
 \advisor{Prof. Dr. Andreas Danuser}
 \projectpartner{Rolf Lüscher}
 \expert{Rolf Lüscher}
@@ -159,14 +159,11 @@
 %------------ START MAIN PART ------------
 \mainmatter
 
-\chapter{First Thesis Chapter}
-\input{content/introduction}
-\input{content/methods}
-\input{content/results}
-
-\chapter{Second Thesis Chapter}
-\input{content/expl_fragments}
-\input{content/discussion}
+\input{content/introduction.tex}
+\input{content/outline.tex}
+\input{content/method.tex}
+\input{content/realization.tex}
+\input{content/results.tex}
 
 %------------ Authorship declaration translated to main language ------------
 \declarationOfAuthorship
