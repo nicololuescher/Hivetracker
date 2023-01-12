@@ -66,10 +66,21 @@ export class DashboardComponent implements OnInit {
         data.weight.forEach((element: any) => {
           weightSet.data.push({ x: element.createdAt, y: element.weight / 1000 });
         });
+        weightSet.data.sort(this.compare)
+        tempSet.data.sort(this.compare)
         this.sets = { temperature: tempSet, weight: weightSet };
         resolve({ temperature: tempSet, weight: weightSet });
       });
     });
+  }
+
+  compare(a: any, b: any) {
+    let d1 = Date.parse(a.x);
+    let d2 = Date.parse(b.x);
+    console.log(d1);
+    if (d1 < d2) return -1;
+    if (d1 > d2) return 1;
+    return 0;
   }
 
   createChart(sets: any): void {
