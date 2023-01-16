@@ -1,0 +1,1 @@
+{"rule":"ENGLISH_WORD_REPEAT_RULE","sentence":"^\\QHiveWatch HiveWatch is a swiss-made\\E$"}

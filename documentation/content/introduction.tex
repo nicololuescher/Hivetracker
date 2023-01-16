@@ -7,34 +7,7 @@ After listening to the research of my family member, I decided to look at the so
 
 This project was realized in the context of my Project 2 course at the Berne University of Applied Sciences.
 
-\pagebreak
-\section{Requirements}
-To start of this project I had to define a set of requirements that the solution should fulfill. These requirements were then used to guide the design of the solution. I sat down with my family member and discussed the functional and non-functional requirements. The functional requirements were the features that the solution should have. The non-functional requirements were the requirements that were not directly related to the functionality of the solution.
-
-\subsection{Functional Requirements}
-\begin{itemize}
-    \item The solution should be able to be deployed in any location.
-    \item The solution should include its own power supply.
-    \item The solution should be able to connect to the internet in a location independent manner.
-    \item The solution should be able to measure the weight of the beehive.
-    \item The solution should be able to measure the temperature of the beehive.
-    \item The solution should publish the data it collects to the internet.
-    \item The solution should save the data it collects in a persistent manner.
-    \item The solution should not require any special equipment to be installed.
-    \item The solution should be able to be installed in a standard beehive.
-    \item The solution should be implementation independent. Meaning that the individual components can be replaced with other components that fulfill the same function.
-\end{itemize}
-\subsection{Non-Functional Requirements}
-\begin{itemize}
-    \item The solution should be as energy efficient as possible.
-    \item The solution should be able to generate its own power.
-    \item The solution should be resistant to the elements.
-    \item The solution should be as cost-effective as possible.
-    \item The solution should be simple to build.
-    \item The solution should be easy to maintain.
-    \item The solution should be easy to extend.
-\end{itemize}
-
+\newpage
 \section{Method}
 Given that I was the only one working on this project, I decided to use a simple agile development process. This process did not follow any classical agile methodology, but rather a simplified version of Kanban. The process consisted of me defining a set of tasks that needed to be done. These tasks were then put into a backlog. I then picked a task from the backlog and started working on it. Once the task was completed, I moved onto the next one. This process was repeated until the project was completed.
 The tasks were grouped into a set of categories.
@@ -58,11 +31,79 @@ The tasks were grouped into a set of categories.
 
 \textbf{Task: Rough Hardware Planning}
 \begin{itemize}
-    \item Define overall setup.
+    \item Define overall setup in regard to the functional requirements.
     \item Define components.
+    \item Define communication protocols.
 \end{itemize}
-\subsubsection{Building}
 
-\subsubsection{Software}
+\textbf{Task: Specific Hardware Planning}
+\begin{itemize}
+    \item Define specific components.
+    \item Define physical setup.
+    \item Define wiring.
+\end{itemize}
+
+\newpage
+\textbf{Task: Software Planning}
+\begin{itemize}
+    \item Define software stack.
+    \item Define software architecture.
+    \item Define data format.
+    \item Define communication protocols.
+    \item Define data flow.
+    \item Define user interface.
+\end{itemize}
+
+\subsubsection{Implementation}
+\textbf{Task: Build Prototype}
+\begin{itemize}
+    \item Procure components.
+    \item Cut raw materials.
+    \item Assemble prototype.
+    \item Solder components.
+    \item Test Components.
+\end{itemize}
+
+\textbf{Task: Server Setup}
+\begin{itemize}
+    \item Setup Docker environment.
+    \item Setup MQTT broker.
+    \item Setup PostgreSQL database.
+    \item Setup NodeJS server.
+    \item Integrate Express into NodeJS server.
+    \item Integrate SequelizeJS into NodeJS server.
+    \item Create database models.
+    \item Persist MQTT messages into database.
+    \item Create API routing.
+    \item Create API endpoints.
+\end{itemize}
+
+\newpage
+\textbf{Task: User Interface Setup}
+\begin{itemize}
+    \item Setup Angular environment.
+    \item Integrate Tailwind CSS into Angular.
+    \item Integrate ChartJS into Angular.
+    \item Create basic layout.
+    \item Create data service.
+    \item Visualize data with ChartJS.
+\end{itemize}
+
+\subsubsection{Testing}
+\textbf{Task: Test Setup}
+\begin{itemize}
+    \item Setup test environment.
+    \item Test weight sensor.
+    \item Test weight calibration.
+    \item Test temperature sensor.
+    \item Test power consumption.
+    \item Test user interface.
+    \item Test end to end communication.
+\end{itemize}
 
 \subsubsection{Documentation}
+\textbf{Task: Documentation}
+\begin{itemize}
+    \item Setup LaTeX environment.
+    \item Write documentation.
+\end{itemize}

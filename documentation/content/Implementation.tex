@@ -1,12 +1,88 @@
 \chapter{Realization}
-\section{Hardware}
-\subsection{Components}
-\subsection{Wiring}
-\subsection{Building Process}
-\section{Software}
-\subsection{Software Stack}
-\subsection{Software Design}
-\subsection{Version Control}
+
+\section{Planning}
+The first phase of the project was the planning phase. In this phase I researched existing solutions and defined the requirements for the project. I also planned the hardware and software setup for my project. This included defining the components, the software stack and the data flow.
+
+\subsection{Requirements}
+To start of this project I had to define a set of requirements that the solution should fulfill. These requirements were then used to guide the design of the solution. I sat down with my family member and discussed the functional and non-functional requirements. The functional requirements were the features that the solution should have. The non-functional requirements were the requirements that were not directly related to the functionality of the solution.
+
+\newpage
+\subsection{Functional Requirements}
+\begin{itemize}
+    \item The solution should be able to be deployed in any location.
+    \item The solution should include its own power supply.
+    \item The solution should be able to connect to the internet in a location independent manner.
+    \item The solution should be able to measure the weight of the beehive.
+    \item The solution should be able to measure the temperature of the beehive.
+    \item The solution should publish the data it collects to the internet.
+    \item The solution should save the data it collects in a persistent manner.
+    \item The solution should not require any special equipment to be installed.
+    \item The solution should be able to be installed in a standard beehive.
+    \item The solution should be implementation independent. Meaning that the individual components can be replaced with other components that fulfill the same function.
+\end{itemize}
+\subsection{Non-Functional Requirements}
+\begin{itemize}
+    \item The solution should be as energy efficient as possible.
+    \item The solution should be able to generate its own power.
+    \item The solution should be resistant to the elements.
+    \item The solution should be as cost-effective as possible.
+    \item The solution should be simple to build.
+    \item The solution should be easy to maintain.
+    \item The solution should be easy to extend.
+\end{itemize}
+
+\newpage
+\subsection{Current Solutions}
+It was important for me that I did not reinvent the wheel and add something to the existing solutions. I therefore researched existing solutions and compared them to my requirements. I found that there are a lot of solutions for beekeepers. Most of them are either very expensive or very complex. I also found that most of the solutions are not open source. This means that the data is not accessible to the beekeeper. This is a problem because the beekeeper should be able to access the data and analyze it in the way they want to and not rely on any proprietary solutions that might not provide them with the information they need. Furthermore, most of the solutions are not modular. This means that the beekeeper is not able to add new sensors or actuators to the system. This is a problem because the beekeeper should be able to add new sensors and actuators to the system. Most of the solutions are also unreasonably expensive and bind the user to a subscription. This means that the beekeeper has to invest a lot of money into the system that doesn't have an obvious return of investment.
+
+\newpage
+\subsubsection{HiveWatch}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/hivewatch_logo.png}
+    \caption{HiveWatch}
+    \label{fig:hivewatch}
+\end{figure}
+HiveWatch is a swiss-made, all in one solution to measure the weight of a beehive. It consists of a "transmitter" that can connect up to 8 scales that are also sold by the company. This seems to be done with a proprietary connector that isn't documented very well. It uses a 4G/LTE-M connection to connect to the internet.
+
+
+\textbf{Price:}
+TODO: Price
+
+\textbf{Interesting Features:}
+\begin{itemize}
+    \item HiveWatch is a modular system withing its own ecosystem. New scales can be added to the system with a proprietary connector. It seems like extending this system is plug-and-play.
+    \item HiveWatch provides an app that can be used to monitor the weight of the beehive. The app also provides a history of the measured data.
+    \item The beekeeper can set up alerts that will notify them if certain events occur. This includes, for example, if the scale thinks it detects a bee swarm.
+\end{itemize}
+\textbf{Problems:}
+\begin{itemize}
+    \item HiveWatch is a closed system. Interfaces are not documented, and the data is not accessible to the beekeeper by default. There is a forum where you can ask questions about the system. The developer seems to be reasonably active and provides information about the system, but this is not a good solution.
+    \item It seems that the data is only accessible through the app. This makes it hard to analyze the data in a way that isn't intended by the developer.
+    \item The solution is very expensive. The system also only seems to work if you have a subscription which is also very expensive.
+\end{itemize}
+
+\newpage
+
+\subsection{Hardware Planning}
+
+
+\subsection{Software Planning}
+
+\section{Implementation}
+
+
+\subsection{Prototype}
+
+
+\subsection{Server Setup}
+
+
+\subsection{User Interface}
+
+
+\section{Testing}
 
 TODO: Current Solutions. Problems with that. Planning phase. Hardware Setup. Components. Wiring. Building Process
 Realization
