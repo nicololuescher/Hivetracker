@@ -4,7 +4,7 @@
 \documentclass[
   a4paper,
   BCOR=15mm,            % Binding correction
-  twoside,
+  twoside=false,
 % openright,
 %  headings=openright,
   bibliography=totoc,   % If enabled add bibliography to TOC
@@ -149,8 +149,6 @@
 
 %----------------  BFH tile page   -----------------------------------------
 \maketitle
-%------------ ABSTRACT        ----------------
-\addchap{Abstract}
 \input{content/abstract}
 
 %------------ TABLEOFCONTENTS ----------------
@@ -160,9 +158,7 @@
 \mainmatter
 
 \input{content/introduction.tex}
-\input{content/outline.tex}
-\input{content/method.tex}
-\input{content/realization.tex}
+\input{content/Implementation.tex}
 \input{content/results.tex}
 
 %------------ Authorship declaration translated to main language ------------
