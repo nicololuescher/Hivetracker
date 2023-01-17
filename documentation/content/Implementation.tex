@@ -40,16 +40,37 @@ It was important for me that I did not reinvent the wheel and add something to t
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/hivewatch_logo.png}
+    \includegraphics[width=0.75\textwidth]{figures/hivewatch_logo.png}
     \caption{HiveWatch}
     \label{fig:hivewatch}
 \end{figure}
 HiveWatch is a swiss-made, all in one solution to measure the weight of a beehive. It consists of a "transmitter" that can connect up to 8 scales that are also sold by the company. This seems to be done with a proprietary connector that isn't documented very well. It uses a 4G/LTE-M connection to connect to the internet.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/hivewatch_scale.jpg}
+    \caption{HiveWatch System}
+    \label{fig:hivewatch_scale}
+\end{figure}
 
 \textbf{Price:}
-TODO: Price
+\begin{table}[ht]
+    \centering
+    \begin{bfhTabular}{lll}
+       Expense & Price
+       \\\hline
+       Transmitter & CHF \num{385.00}\\\hline
+       Scale & CHF \num{204.00} & \\\hline
+       Brood Humidity Sensor & CHF \num{65.00}\\\hline
+       Extension Cable & CHF \num{19.00} & \\\hline
+       Subscription for 1 year & CHF \num{89.00}\\\hline
+       \textbf{Total} &  \textbf{CHF 862.00}
+    \end{bfhTabular}
+    \caption{Price HiveWatch system}
+    \label{tab:hivewatch_price}
+ \end{table}
 
+\newpage
 \textbf{Interesting Features:}
 \begin{itemize}
     \item HiveWatch is a modular system withing its own ecosystem. New scales can be added to the system with a proprietary connector. It seems like extending this system is plug-and-play.
@@ -62,27 +83,227 @@ TODO: Price
     \item It seems that the data is only accessible through the app. This makes it hard to analyze the data in a way that isn't intended by the developer.
     \item The solution is very expensive. The system also only seems to work if you have a subscription which is also very expensive.
 \end{itemize}
+\newpage
+
+\subsubsection{Wolf-Waagen}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{figures/wolf_waagen_logo.jpg}
+    \caption{Wolf-Waagen}
+    \label{fig:wolf_waagen}
+\end{figure}
+Wolf-Waagen (Wolf-Scales) is a German business that specializes in bee scales. They sell a variety of scales that can be used to measure the weight of a beehive. They also have a diverse variety of sensors that can be used to collect additional data points like rainfall or wind. Furthermore, they provide a web interface that can be used to monitor the scales and provide an SMS altering service.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/wolf_waagen_4.0.jpg}
+    \caption{Wolf-Waagen System}
+    \label{fig:wolf_waagen_4.0}
+\end{figure}
+
+\textbf{Price:}
+Sadly, Wolf-Waagen doesn't give any exact information about pricing. They only specify the minimum price of the "ApiGraph4.0" scale, which is €\num{899.00}.
+\begin{table}[ht]
+    \centering
+    \begin{bfhTabular}{lll}
+       Expense & Price
+       \\\hline
+       ApiGraph4.0 & € \num{899.00}+\\\hline
+       Software Service for 1 year & € \num{24.00} & \\\hline
+       Data Plan for 1 year & € \num{15.00}\\\hline
+       \textbf{Total} &  \textbf{CHF 938.00+}
+    \end{bfhTabular}
+    \caption{Price Wolf-Waagen system}
+    \label{tab:tab1}
+ \end{table}
+
+\newpage
+\textbf{Interesting Features:}
+\begin{itemize}
+    \item The scale appears to be really well-built. Most of the parts are made of metal and the scale looks really sturdy. Overall it seems like a good quality product. 
+    \item Wolf-Waagen provides the option to connect additional sensors to the scale. It also seems like you can easily hook up additional scales to the system.
+    \item They give you the option to have a diverse assortment of power sources. This includes solar panels, batteries, and a power adapter.
+\end{itemize}
+\textbf{Problems:}
+\begin{itemize}
+    \item Although the system seems to be really well-built, it is very expensive. The price of the scale is already very high, and the subscription and data plan are also very expensive.
+    \item It looks like you have to completely rely on the Wolf-Waagen service. The data is not accessible to the beekeeper by default. The beekeeper can only access the data through the web interface. This makes it hard to analyze the data in a way that isn't intended by the developer.
+\end{itemize}
+
+\newpage
+
+\subsection{Open Source Solutions}
+
+There are a lot of open source projects that aim to solve the same problem. However, as with many open source projects, they are not very well documented and are not very easy to use. Also since they are often created by hobbyists, they are not general purpose solutions. They are often very specific to the needs of the creator. This makes it hard to use them in a real-world scenario.
+
+Because of this, I decided to not use any of these solutions as is but to improve on existing concepts. I think that it is better to create my own solution easy to use and is suited to my needs.
 
 \newpage
 
 \subsection{Hardware Planning}
+\subsubsection{Rough Setup}
+In essence, the scale needs to provide a surface on which the beehive can be mounted and that measures the weight applied to it. This should be as low to profile as possible as not to interfere with any existing mounting equipment like standoffs or compartments in a bee house.
 
+For this reason, I've decided to work with a simple, two plates approach. The first plate is the actual scale on which the beehive is mounted. The second plate is a baseplate to provide a stable foundation to the second plate. The load cells are mounted in between the two plates together with the load cell amplifier, so there is no need for any additional wiring and the scale can be connected to the microcontroller over a single cable.
 
+The microcontroller is located in a separate housing, so it can be easily accessed without disassembling the scale. Any additional sensors or actuators can be connected to the microcontroller. In this case, I've decided to use a waterproof temperature sensor to be used inside the beehive as a proof of concept.
+
+\subsubsection{Scale}
+The baseplates are made out of wood and are 40 cm x 70 cm x 2 cm to accommodate a Swiss beehive. The have 4 holes in the corners to connect the plates to each other with the help of nuts, washers and bolts. The holes are countersunk to make sure that the nuts and bolt-heads are not protruding from the surface.
+
+The four load cells are then glued to the baseplate with epoxy about 10 cm away from each edge and wired together.
+
+\begin{figure}
+    \centering
+    \includegraphics[angle=90,width=1\textwidth]{figures/hivetracker_baseplate.pdf}
+    \caption{Baseplate Technical Drawing}
+    \label{fig:baseplate_drawing}
+\end{figure}
+\newpage
+
+\subsubsection{Load Cells}
+The load cells used are a generic Chinese product normally used for human scales and are rated for 50 kg each. Since there are four of them, the maximum weight that can be measured is 200 kg. This is more than enough for a beehive.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/loadcell.jpg}
+    \caption{Load Cell}
+    \label{fig:loadcell}
+\end{figure}
+
+\newpage
+\subsubsection{Load Cell Amplifier}
+The load cells are connected to a HX711 load cell amplifier. It is used to read the measurements from the load cells and convert them into usable data. The amplifier is connected to the microcontroller.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/hx711.jpg}
+    \caption{Load Cell Amplifier}
+    \label{fig:loadcell_amplifier}
+\end{figure}
+
+\newpage
+\subsubsection{Temperature Sensor}
+The temperature sensor is a DS18B20 waterproof temperature sensor with a 3 m cable. It is connected to the microcontroller and can be used to measure the temperature inside the beehive.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/DS18B20.png}
+    \caption{Temperature Sensor}
+    \label{fig:temperature_sensor}
+\end{figure}
+\newpage
+\subsubsection{Microcontroller}
+The microcontroller is LILYGO® TTGO T-Call V1.4 ESP32 Wireless Module with a built-in SIM800L Module for GSM/GPRS. It is already capable to connect the internet via a SIM card out of the box, and it can be powered by a 3.3V - 5V DC power source, making it possible to use a wide variety of power sources. The documentation is quite poor, mostly consisting of a Chinese data sheet and a few examples. However, it is possible to use the Arduino IDE to program it, which makes it easy to use since all the necessary libraries to use the load cell amplifier and the temperature sensor are already included.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/esp32.jpg}
+    \caption{LILYGO® TTGO T-Call V1.4 ESP32 Wireless Module Microcontroller}
+    \label{fig:esp32}
+\end{figure}
+
+\newpage
 \subsection{Software Planning}
 
+\subsubsection{Architecture}
+The software is split into five different components. These components should be connected to each other via a simple interface, so that it is easy to replace any of them with a different implementation.
+The components are:
+\begin{itemize}
+    \item Sensor Block
+    \item Data Broker
+    \item Backend
+    \item Database
+    \item User Interface
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/hivetracker_software_architecture.png}
+    \caption{Software Architecture}
+    \label{fig:software_architecture}
+\end{figure}
+
+\subsubsection{Sensor Block / ESP32 Firmware}
+The sensor block runs the ESP32 firmware. The ESP32 firmware is written in C++ and uses the Arduino framework. It implements several libraries to interact with the hardware. Refer to section \ref{sec:firmware} for more information.
+
+\subsubsection{Data Broker}
+Data between the sensor block and the backend is exchanged via a data broker. The data broker is a simple MQTT broker. The sensor block publishes the data to the broker and the backend subscribes to this data. The data broker is implemented using the Mosquitto MQTT broker. Refer to section \ref{sec:data_broker} for more information.
+
+\subsubsection{Backend}
+The backend listens for data coming from the sensor block by subscribing to the data broker. If there is new data, it is timestamped and stored in the database. The backend also provides an API that can be used by the frontend to receive data from the database and make changes to the calibration information used to calibrate the scale. The backend is implemented using Node.js and Express. Refer to section \ref{sec:backend} for more information.
+
+\subsubsection{Database}
+The database is used to store all data related to the beehive. It makes the otherwise ephemeral data persistent and allows to query it. The database is implemented using Postgres. Refer to section \ref{sec:database} for more information.
+
+\newpage
 \section{Implementation}
 
 
 \subsection{Prototype}
+\subsubsection {Hardware} \label{sec:hardware}
+The first step was to build the hardware of the prototype. For this I first had to build the scale itself.
 
+For this I cut out the baseplates from wood according to my technical drawing and then drilled the required holes for the nuts and bolts. I then glued the load cells to the baseplates and wired them together as seen in figure \ref{fig:loadcell_wiring}. I had to drill some shallow relief holes I did not account for in my design because the load cells had a small protrusion and wouldn't have laid flush otherwise. Furthermore, I then connected the load cells to the load cell amplifier and the load cell amplifier to the microcontroller.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/loadcell_wiring.png}
+    \caption{Baseplate Prototype}
+    \label{fig:loadcell_wiring}
+\end{figure}
+
+After that, I glued some squares cut from hard plastic and glued them to the baseplate without the load cells at the contact points of the load cells. This is to prevent the load cells from digging into the wood and to make sure that the load cells are not damaged by the wood. I then placed the two plates on top of each other and bolted them together.
+
+I then tested the scale for accuracy and repeatability. I found that the scale was not suited for quick measurements, since it takes a few seconds for the load cells to settle. My guess is that this is due to stress in the wood. However, it is accurate enough for my purposes since I am interested in the change in weight over time, not the absolute weight at a given moment.
+
+After this I connected the temperature sensor to the microcontroller. For this, I had to solder a 4.7 k\Omega resistor to the temperature sensor and connect it to the microcontroller as seen in figure \ref{fig:temperature_wiring}. I then tested the temperature sensor and found that it was very accurate.
+
+\begin{figure}
+    \centering
+    \includegraphics[angle=270,width=1\textwidth]{figures/temperature_wiring.png}
+    \caption{Temperature Sensor Prototype}
+    \label{fig:temperature_wiring}
+\end{figure}
+
+\newpage
+\subsubsection {Firmware} \label{sec:firmware}
+The firmware is written in C++ and uses the Arduino framework and is used to get the data from the sensors to the data broker.
+
+Simplified, the firmware performs the following steps:
+
+\begin{enumerate}
+    \item Determine the board type and set up the hardware accordingly
+    \item Set configuration values
+    \item Establish a connection to the GSM network via the SIM800L module
+    \item Set up a connection to the data broker via MQTT
+    \item Initialize the temperature Sensor
+    \item Initialize the load cell amplifier
+    \item Read the Temperature
+    \item Read the Weight
+    \item Write the data to the data broker
+    \item Disconnect from the data broker
+    \item Disconnect from the GSM network
+    \item Enter deep sleep mode for a given amount of time
+    \item Wake up and repeat
+\end{enumerate}
+
+Refer to appendix \ref{lst:firmware} for the full source code of the firmware.
 
 \subsection{Server Setup}
+\subsubsection {Data Broker} \label{sec:data_broker}
+For easy deployment, I decided to use a docker container for the data broker. I used the official Mosquitto docker image and configured it to use a password file for authentication. I also configured it to use TLS encryption. Refer to appendix \ref{lst:mosquitto-conf} for the configuration file and to appendix \ref{lst:mqtt-docker-compose} for the docker compose file.
+
+This broker provides standard MQTT functionality and is used to exchange data between the sensor block and the backend. The sensor block publishes the data to a topic on the broker and the backend subscribes to this topic. This means that the backend automatically gets notified when new data is available and doesn't have to poll the broker for new data.
+
+\subsubsection {Backend} \label{sec:backend}
 
 
-\subsection{User Interface}
+\subsubsection {Database} \label{sec:database}
+
+
+\subsection{User Interface}\label{sec:user_interface}
 
 
 \section{Testing}
-
-TODO: Current Solutions. Problems with that. Planning phase. Hardware Setup. Components. Wiring. Building Process
-Realization
