@@ -360,6 +360,39 @@ Power consumption is a very important factor in "off-grid" IOT systems. It deter
 
 To measure the power consumption, a USB power meter was hooked in between the power supply and the microcontroller. The power meter was then used to measure the voltage and current draw of the system. TODO: Figure with power consumption.
 
+\subsubsection{Methodology}
+The power meter used was a UM34C inline USB power meter. Measures the voltage and current draw of the USB port and saves it to a CSV file. The CSV file was then imported into a spreadsheet and the average current draw was calculated. The average current draw was then multiplied by the voltage to get the average power consumption.
+
+The microcontroller was set to instantly restart after it has done one measuring cycle. This was done for a total of 20 cycles. The average current draw was then calculated from the 20 measurements. This was done to reduce the influence of the power supply on the measurements. The power supply used was a 5V 2A power supply. With this information the average power consumption of a single measuring cycle can be calculated.
+
+The deep sleep current was too low to be measured by the power meter. Therefore, 150\mu A given in the datasheet \cite{espressif_esp32} was used. 
+
+TODO calculations
+
 
 
 \subsection{Software Testing}
+Due to the simplicity of the software, no automated testing were done. The software was tested manually by trying to interact with it and observing the results. The results were then compared to the expected results.
+
+\subsubsection{Data Broker}
+The data broker was tested with the \textbf{MQTT Explorer} client. This allows to connect to the broker directly and see what data is being published. This also allows to verify the TLS authentication. The network traffic was also monitored to verify that the data is being encrypted and no plain text information like usernames and passwords are being sent over the network unencrypted.
+
+The broker satisfied all the requirements and was therefore considered to be working correctly.
+
+\subsubsection{Backend}
+The functionality of the backend was verified by exploring the API endpoints using \textbf{Postman}. This allowed to verify that the endpoints are working correctly and that the data is being stored correctly in the database. The subscription to the MQTT broker was also verified by using the MQTT Explorer client to publish data to the broker and observing the results in the backend.
+
+The backend satisfied all the requirements and was therefore considered to be working correctly.
+
+\subsubsection{Database}
+The database was tested by accessing the database directly using the \textbf{Adminer} web application and verifying that the tables were set up correctly by Sequelize and that the data was being stored correctly. The database was also verified by using the API endpoints and observing if the data was being stored correctly.
+
+The database satisfied all the requirements and was therefore considered to be working correctly.
+
+\subsubsection{User Interface}
+The user interface was tested by using it to interact with the system and testing the different features. This included testing the different API endpoints and observing the results. For example by testing the calibration of the scale and observing if the zero offset was being set and the scale was being calibrated correctly.
+
+The user interface was also tested on different devices to verify that it is responsive and works correctly on different screen sizes.
+
+The user interface satisfied all the requirements and was therefore considered to be working correctly.
+\Gls{BibTeX}
