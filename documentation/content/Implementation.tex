@@ -298,12 +298,41 @@ For easy deployment, I decided to use a docker container for the data broker. I 
 This broker provides standard MQTT functionality and is used to exchange data between the sensor block and the backend. The sensor block publishes the data to a topic on the broker and the backend subscribes to this topic. This means that the backend automatically gets notified when new data is available and doesn't have to poll the broker for new data.
 
 \subsubsection {Backend} \label{sec:backend}
+The backend persists the data coming from the data broker and makes it available to the user interface. It is implemented using Node.js and Express. It uses the MQTT.js library to connect to the data broker and uses Sequelize to interact with the database. Refer to appendix \ref{sec:backend} for the relevant source code of the backend.
 
+\textbf{Node.js} is a JavaScript runtime that allows to run JavaScript code outside the browser. This makes it possible to implement server side code in JavaScript. It also provides a package manager that allows to easily install and manage dependencies called NPM (Node Packet Manager). In this project, Node is used to handle incoming HTTP requests and to interact with the database. 
+It exposes an API that allows to query the database and to retrieve the data to be displayed in the user interface. There are also endpoints that allow to update the configuration of the beehive. This includes a server side method to calibrate the scale and set a zero offset. Refer to appendix \ref{lst:app.js} for the relevant source code of the backend.
+
+\textbf{Express.js} is a web framework for Node.js that allows to easily implement HTTP endpoints. It provides a simple API to define the endpoints and to handle incoming requests. It also provides a middleware system that allows to easily add functionality to the endpoints. Express.js provides an easy way to implement backend routing and greatly simplifies the code structure and the endpoint management.
+
+\textbf{Sequelize} is an ORM (Object Relational Mapper) that allows to interact with the database using JavaScript objects. It provides a simple API to define the database schema and to interact with the database. It also provides a migration system that allows to easily update the database schema. This is useful for example when new data is added to the database or when the data format changes. It also allows to easily query the database and to retrieve the data in a format that is easy to use in the user interface without having to write any SQL queries. Refer to appendix \ref{lst:database.js} for the database schema.
+Sequelize adds the "createdAt" and "updatedAt" field to any data entry by default and automatically updates them when the data is changed. This further simplifies the backend code.
+
+\textbf{MQTT.js} is a library that allows to connect to an MQTT broker and to subscribe to topics. It also provides an API to publish data to a topic. It is used to connect to the data broker and to subscribe to the topic that the sensor block publishes to. The backend is then automatically notified when new data is available and can act accordingly.
+
+\textbf{Networking}
+The backend and the frontend are intended to be deployed on the same machine. To simplify the port management, a reverse proxy is used to route all API requests to the backend and all other requests to the frontend. This is done using the Angular reverse proxy. This allows the machine to only expose port 80 and 443 to the internet and handle the rest internally making it easier to implement TLS encryption.
 
 \subsubsection {Database} \label{sec:database}
+The database is used to store data related to the project. It is implemented using PostgreSQL and is managed using Sequelize. It is running in a docker container and is exposed to the backend via a docker network making it easy to deploy and manage. The same docker container is also running an Adminer instance that allows to easily manage the database. Refer to appendix \ref{lst:database-docker-compose.yml} for the docker compose file.
 
-
+\newpage
 \subsection{User Interface}\label{sec:user_interface}
+The system is designed to make it user interface agnostic. This means that the user interface can take any shape and form as long as it can interact with the backend over the provided API endpoints. This allows to easily implement different user interfaces for different use cases. For example, a user interface for a mobile phone and a user interface for a desktop computer. This also allows to easily implement different user interfaces for different users. For example, a user interface for the beekeeper and a user interface for the bee researcher.
 
+The user interface I've implemented for this project is a simple web application that allows to view the data coming from the beehive. The user is also able to update the configuration of the beehive. This includes a method to calibrate the scale and set a zero offset and therefore provides all the functionality to set up the beehive.
 
+The user interface is implemented using \textbf{Angular} and is deployed using the Angular reverse proxy. This is a bit overkill for this project, but it allows to easily extend the user interface in the future by providing a simple way to add new pages, components and services. For styling, \textbf{TailwindCSS} is used. It provides a simple, low CSS way to style the user interface with a result focused, fast approach.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/user_interface.png}
+    \caption{Screenshot of the user interface}
+    \label{fig:user_interface}
+\end{figure}
+
+\newpage
 \section{Testing}
+\subsection{Hardware Testing}
+\subsection{Power Consumption}
+\subsection{Software Testing}
