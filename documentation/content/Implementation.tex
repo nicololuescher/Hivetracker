@@ -316,6 +316,19 @@ The backend and the frontend are intended to be deployed on the same machine. To
 \subsubsection {Database} \label{sec:database}
 The database is used to store data related to the project. It is implemented using PostgreSQL and is managed using Sequelize. It is running in a docker container and is exposed to the backend via a docker network making it easy to deploy and manage. The same docker container is also running an Adminer instance that allows to easily manage the database. Refer to appendix \ref{lst:database-docker-compose.yml} for the docker compose file.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/database_shema.png}
+    \caption{Database Schema}
+    \label{fig:database}
+\end{figure}
+
+The database schema is quite simple. It consists of three tables that store the relevant data.
+
+\textbf{Temperatures} and \textbf{Weights} store the data coming from the sensors. They both have a \textbf{value} field that stores the actual data and a \textbf{createdAt} field that stores the timestamp when the data was created. The \textbf{updatedAt} field is automatically updated by Sequelize when the data is changed. This means that the data can be queried by the backend using the \textbf{createdAt} field and the backend can easily determine the time difference between two data points. They also both have a \textbf{hiveId} field that stores the ID of the beehive that the data belongs to. This allows for multiple beehives to be connected to the same database.
+
+The \textbf{Hives} database stores information about a given hive. This includes administrative information like among other things a name to tell them apart and a location to determine where they are located. This might be used by a frontend to provide geodata or to collect additional data like weather. It also stores values that are used to calibrate the scale. This includes a \textbf{hiveWeightOffset} field that stores the offset that is used to zero the scale and a \textbf{hiveWeightCalibrationFactor} field that stores a factor used to calibrate the scale. This means that all the information needed to display the data from the beehive is stored on the database and the user interface doesn't have to do any calculations. This also allows the user to change the calibration of the scale at any time without having to do any changes to the scale itself.
+
 \newpage
 \subsection{User Interface}\label{sec:user_interface}
 The system is designed to make it user interface agnostic. This means that the user interface can take any shape and form as long as it can interact with the backend over the provided API endpoints. This allows to easily implement different user interfaces for different use cases. For example, a user interface for a mobile phone and a user interface for a desktop computer. This also allows to easily implement different user interfaces for different users. For example, a user interface for the beekeeper and a user interface for the bee researcher.
@@ -334,5 +347,19 @@ The user interface is implemented using \textbf{Angular} and is deployed using t
 \newpage
 \section{Testing}
 \subsection{Hardware Testing}
+Testing the system was done by trying to change the measured weight and temperature values and observing the results. The results were then compared to the expected results. The expected results were determined by the expected behavior of the system. This was done by setting up the system and then randomly changing the ambient temperature and adding/removing weight from the scale. The result of one of those testing sessions can be seen in figure \ref{fig:user_interface}.
+
+The results of those tests showed that the temperature measurements are very accurate and closely match the ambient temperature. There were no sudden inaccuracies or spikes in the temperature measurements. 
+
+The weight measurements however showed a great degree of uncertainty and drift. The weight would drift up and down by several hundred grams without any changes to the scale itself. These drifts however correlated with other changing factors like temperature or time since the last weight change. This means that the weight measurements are not very accurate and can't be used to determine the weight of the beehive with a high degree of accuracy. This is most likely due to the fact that the scale is built from natural wood that experiences internal stresses and changes in weight over time \cite{wood_deformation}. Another potential error sources are the load cells themselves. Load cells are known for being influenced by temperature changes \cite{loadcell_temperature}. This effect is even greater on cheap, consumer grade load cells.
+
+These inaccuracies can be mitigated in several ways. The wood could be replaced by a more thermally stable material like processed wood, metal or plastic. The inaccuracies of the load cells could be reduced by installing a reference load cell that measures a know weight and using the difference between the theoretical weight and the measured weight to compensate for the temperature changes. This however are not trivial changes and are out of scope for this project and will be left for future work.
+
 \subsection{Power Consumption}
+Power consumption is a very important factor in "off-grid" IOT systems. It determines the choice of power supply that is necessary to power the system.
+
+To measure the power consumption, a USB power meter was hooked in between the power supply and the microcontroller. The power meter was then used to measure the voltage and current draw of the system. TODO: Figure with power consumption.
+
+
+
 \subsection{Software Testing}
