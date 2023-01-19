@@ -358,7 +358,15 @@ These inaccuracies can be mitigated in several ways. The wood could be replaced 
 \subsection{Power Consumption}
 Power consumption is a very important factor in "off-grid" IOT systems. It determines the choice of power supply that is necessary to power the system.
 
-To measure the power consumption, a USB power meter was hooked in between the power supply and the microcontroller. The power meter was then used to measure the voltage and current draw of the system. TODO: Figure with power consumption.
+To measure the power consumption, a USB power meter was hooked in between the power supply and the microcontroller. The power meter was then used to measure the voltage and current draw of the system.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{figures/power_consumption_graph.png}
+    \caption{Power consumption of the system over multiple measuring cycles}
+    \label{fig:power_consumption}
+\end{figure}
+See \ref{lst:power-management} for the data used to generate the graph.
 
 \subsubsection{Methodology}
 The power meter used was a UM34C inline USB power meter. Measures the voltage and current draw of the USB port and saves it to a CSV file. The CSV file was then imported into a spreadsheet and the average current draw was calculated. The average current draw was then multiplied by the voltage to get the average power consumption.
@@ -367,8 +375,11 @@ The microcontroller was set to instantly restart after it has done one measuring
 
 The deep sleep current was too low to be measured by the power meter. Therefore, 150\mu A given in the datasheet \cite{espressif_esp32} was used. 
 
-TODO calculations
+With an average current draw of 92mA and an average voltage of 5.16V, the average power consumption during a measuring cycle is 0.48W. With a cycle duration of about 30 seconds, the average power consumption per cycle is 0.0158Wh. This means that the system can complete about 770 cycles on a standard 18650 battery with a capacity of 12.2Wh. The power consumption during deep sleep is about 75mW  which is negligible compared to the power consumption during a measuring cycle. Those numbers show that the battery life of the system is limited by the battery capacity and the frequency of the measuring cycles.
 
+With a setup of 4 18650 batteries and a cycle frequency of 1 cycle every 10 minutes, the system can run for about 21.4 days before the batteries need to be replaced. If we only take measurements every hour, which is what most beekeepers do, the system can run for about 128 days which means that the batteries only need to be replaced three times a year.
+
+Adding solar panels to the system would enable it to run indefinitely. With a 10-minute measuring frequency, the system would have to be in direct sunlight every 21 days to keep the batteries charged. This should be more than enough for most beekeepers and would be a great future improvement to the system.
 
 
 \subsection{Software Testing}
