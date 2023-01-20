@@ -1,10 +1,10 @@
 \chapter{Realization}
 
 \section{Planning}
-The first phase of the project was the planning phase. In this phase I researched existing solutions and defined the requirements for the project. I also planned the hardware and software setup for my project. This included defining the components, the software stack and the data flow.
+The first phase of the project consisted of the planing phase. In this phase I researched existing solutions and defined the requirements for the project. I also planned the hardware and software setup for my project. This included defining the components, the \Gls{Software stack} and the \Gls{Data flow}.
 
 \subsection{Requirements}
-To start of this project I had to define a set of requirements that the solution should fulfill. These requirements were then used to guide the design of the solution. I sat down with my family member and discussed the functional and non-functional requirements. The functional requirements were the features that the solution should have. The non-functional requirements were the requirements that were not directly related to the functionality of the solution.
+To start this project I had to define a set of requirements that the solution should fulfill. These requirements were then used to guide the design of the solution. I sat down with my family member and discussed the \gls{functional requirements} and \gls{non-functional requirements}. The functional requirements were the features that the solution should have. The non-functional requirements were the requirements that were not directly related to the functionality of the solution.
 
 \newpage
 \subsection{Functional Requirements}
@@ -33,7 +33,7 @@ To start of this project I had to define a set of requirements that the solution
 
 \newpage
 \subsection{Current Solutions}
-It was important for me that I did not reinvent the wheel and add something to the existing solutions. I therefore researched existing solutions and compared them to my requirements. I found that there are a lot of solutions for beekeepers. Most of them are either very expensive or very complex. I also found that most of the solutions are not open source. This means that the data is not accessible to the beekeeper. This is a problem because the beekeeper should be able to access the data and analyze it in the way they want to and not rely on any proprietary solutions that might not provide them with the information they need. Furthermore, most of the solutions are not modular. This means that the beekeeper is not able to add new sensors or actuators to the system. This is a problem because the beekeeper should be able to add new sensors and actuators to the system. Most of the solutions are also unreasonably expensive and bind the user to a subscription. This means that the beekeeper has to invest a lot of money into the system that doesn't have an obvious return of investment.
+It was important for me to not not reinvent the wheel and add something to the existing solutions. I therefore researched existing solutions and compared them to my requirements. I found that there are a lot of solutions for beekeepers. Most of them are either very expensive or very complex. I also found that most of the solutions are not \gls{Open source}. This means that the data is not accessible to the beekeeper. This is a problem because the beekeeper should be able to access the data and analyze it in the way they want to and not to be forced to rely on any proprietary solutions that might not provide them with the information they need. Furthermore, most of the solutions are not \gls{modular}. This means that the beekeeper is not able to add new \gls{sensors} or \gls{actuators} to the system. This is a problem because the beekeeper should be able to add new sensors and actuators to the system. Most of the solutions are also unreasonably expensive and bind the user to a subscription. This means that the beekeeper has to invest a lot of money into the system that doesn't provide an obvious return of investment.
 
 \newpage
 \subsubsection{HiveWatch}
@@ -44,7 +44,7 @@ It was important for me that I did not reinvent the wheel and add something to t
     \caption{HiveWatch}
     \label{fig:hivewatch}
 \end{figure}
-HiveWatch is a swiss-made, all in one solution to measure the weight of a beehive. It consists of a "transmitter" that can connect up to 8 scales that are also sold by the company. This seems to be done with a proprietary connector that isn't documented very well. It uses a 4G/LTE-M connection to connect to the internet.
+HiveWatch is a swiss-made, all in one solution to measure the weight of a beehive. It consists of a "transmitter" that can connect up to 8 scales that are also sold by the company. This seems to be done with a proprietary connector that isn't documented very well. It uses a \Gls{4G}/\Gls{LTE-M} connection to connect to the internet.
 
 \begin{figure}
     \centering
@@ -73,7 +73,7 @@ HiveWatch is a swiss-made, all in one solution to measure the weight of a beehiv
 \newpage
 \textbf{Interesting Features:}
 \begin{itemize}
-    \item HiveWatch is a modular system withing its own ecosystem. New scales can be added to the system with a proprietary connector. It seems like extending this system is plug-and-play.
+    \item HiveWatch is a modular system within its own ecosystem. New scales can be added to the system with a proprietary connector. It seems like extending this system is plug-and-play.
     \item HiveWatch provides an app that can be used to monitor the weight of the beehive. The app also provides a history of the measured data.
     \item The beekeeper can set up alerts that will notify them if certain events occur. This includes, for example, if the scale thinks it detects a bee swarm.
 \end{itemize}
@@ -127,7 +127,7 @@ Sadly, Wolf-Waagen doesn't give any exact information about pricing. They only s
 \end{itemize}
 \textbf{Problems:}
 \begin{itemize}
-    \item Although the system seems to be really well-built, it is very expensive. The price of the scale is already very high, and the subscription and data plan are also very expensive.
+    \item Although the system seems to be very well-built, it is very expensive. The price of the scale is already very high, and the subscription and data plan are also very expensive.
     \item It looks like you have to completely rely on the Wolf-Waagen service. The data is not accessible to the beekeeper by default. The beekeeper can only access the data through the web interface. This makes it hard to analyze the data in a way that isn't intended by the developer.
 \end{itemize}
 
@@ -137,20 +137,20 @@ Sadly, Wolf-Waagen doesn't give any exact information about pricing. They only s
 
 There are a lot of open source projects that aim to solve the same problem. However, as with many open source projects, they are not very well documented and are not very easy to use. Also since they are often created by hobbyists, they are not general purpose solutions. They are often very specific to the needs of the creator. This makes it hard to use them in a real-world scenario.
 
-Because of this, I decided to not use any of these solutions as is but to improve on existing concepts. I think that it is better to create my own solution easy to use and is suited to my needs.
+Because of this, I decided to not use any of these solutions as they are, but to improve on existing concepts. I think that it is better to create my own solution that is easy to use and is suited to my needs.
 
 \newpage
 
 \subsection{Hardware Planning}
 \subsubsection{Rough Setup}
-In essence, the scale needs to provide a surface on which the beehive can be mounted and that measures the weight applied to it. This should be as low to profile as possible as not to interfere with any existing mounting equipment like standoffs or compartments in a bee house.
+In essence, the scale needs to provide a surface on which the beehive can be mounted and that measures the weight applied to it. This should be as low profile as possible as to not interfere with any existing mounting equipment like standoffs or compartments in a \gls{Apiary}.
 
-For this reason, I've decided to work with a simple, two plates approach. The first plate is the actual scale on which the beehive is mounted. The second plate is a baseplate to provide a stable foundation to the second plate. The load cells are mounted in between the two plates together with the load cell amplifier, so there is no need for any additional wiring and the scale can be connected to the microcontroller over a single cable.
+For this reason, I've decided to work with a simple, two plates approach. The first plate is the actual scale on which the beehive is mounted. The second plate is a baseplate to provide a stable foundation to the second plate. The load cells are mounted in between the two plates together with the load cell \gls{amplifier}, so there is no need for any additional wiring and the scale can be connected to the microcontroller with a single cable.
 
-The microcontroller is located in a separate housing, so it can be easily accessed without disassembling the scale. Any additional sensors or actuators can be connected to the microcontroller. In this case, I've decided to use a waterproof temperature sensor to be used inside the beehive as a proof of concept.
+The microcontroller is located in a separate housing, so it can be easily accessed without disassembling the scale. Any additional sensors or actuators can be connected to the microcontroller. In this case, I've decided to use a waterproof temperature sensor to be used inside the beehive to measure the temperature inside the \gls{Brood chamber} as a proof of concept.
 
 \subsubsection{Scale}
-The baseplates are made out of wood and are 40 cm x 70 cm x 2 cm to accommodate a Swiss beehive. The have 4 holes in the corners to connect the plates to each other with the help of nuts, washers and bolts. The holes are countersunk to make sure that the nuts and bolt-heads are not protruding from the surface.
+The baseplates are made out of wood and are 40 cm x 70 cm x 2 cm to accommodate a Swiss beehive. They have 4 holes in the corners to connect the plates to each other with the help of nuts, washers and bolts. The holes are countersunk to make sure that the nuts and bolt-heads are not protruding from the surface.
 
 The four load cells are then glued to the baseplate with epoxy about 10 cm away from each edge and wired together.
 
@@ -195,7 +195,7 @@ The temperature sensor is a DS18B20 waterproof temperature sensor with a 3 m cab
 \end{figure}
 \newpage
 \subsubsection{Microcontroller}
-The microcontroller is LILYGO® TTGO T-Call V1.4 ESP32 Wireless Module with a built-in SIM800L Module for GSM/GPRS. It is already capable to connect the internet via a SIM card out of the box, and it can be powered by a 3.3V - 5V DC power source, making it possible to use a wide variety of power sources. The documentation is quite poor, mostly consisting of a Chinese data sheet and a few examples. However, it is possible to use the Arduino IDE to program it, which makes it easy to use since all the necessary libraries to use the load cell amplifier and the temperature sensor are already included.
+The microcontroller is LILYGO® TTGO T-Call V1.4 ESP32 Wireless Module with a built-in SIM800L Module for \Gls{GSM}/\Gls{GPRS}. It is already capable to connect the internet via a \Gls{SIM} card out of the box, and it can be powered by a 3.3V - 5V \Gls{DC} power source, making it possible to use a wide variety of power sources. The documentation is quite poor, mostly consisting of a data sheet in Chinese and a few examples. However, it is possible to use the \Gls{Arduino IDE} to program it, which makes it easy to use since all the necessary libraries to use the load cell amplifier and the temperature sensor are already included.
 
 \begin{figure}
     \centering
@@ -207,15 +207,15 @@ The microcontroller is LILYGO® TTGO T-Call V1.4 ESP32 Wireless Module with a bu
 \newpage
 \subsection{Software Planning}
 
-\subsubsection{Architecture}
+\subsubsection{\Gls{Architecture}}
 The software is split into five different components. These components should be connected to each other via a simple interface, so that it is easy to replace any of them with a different implementation.
 The components are:
 \begin{itemize}
-    \item Sensor Block
-    \item Data Broker
-    \item Backend
-    \item Database
-    \item User Interface
+    \item \Gls{Sensor Block}
+    \item \Gls{Data Broker}
+    \item \Gls{Backend}
+    \item \Gls{Database}
+    \item \Gls{User Interface}
 \end{itemize}
 
 \begin{figure}
@@ -225,11 +225,11 @@ The components are:
     \label{fig:software_architecture}
 \end{figure}
 
-\subsubsection{Sensor Block / ESP32 Firmware}
+\subsubsection{Sensor Block / \Gls{ESP32} \Gls{Firmware}}
 The sensor block runs the ESP32 firmware. The ESP32 firmware is written in C++ and uses the Arduino framework. It implements several libraries to interact with the hardware. Refer to section \ref{sec:firmware} for more information.
 
 \subsubsection{Data Broker}
-Data between the sensor block and the backend is exchanged via a data broker. The data broker is a simple MQTT broker. The sensor block publishes the data to the broker and the backend subscribes to this data. The data broker is implemented using the Mosquitto MQTT broker. Refer to section \ref{sec:data_broker} for more information.
+Data between the sensor block and the backend is exchanged via a data broker. The data broker is a simple MQTT broker. The sensor block publishes the data to the broker and the backend subscribes to this data. The data broker is implemented using the \Gls{Mosquitto} \Gls{MQTT} broker. Refer to section \ref{sec:data_broker} for more information.
 
 \subsubsection{Backend}
 The backend listens for data coming from the sensor block by subscribing to the data broker. If there is new data, it is timestamped and stored in the database. The backend also provides an API that can be used by the frontend to receive data from the database and make changes to the calibration information used to calibrate the scale. The backend is implemented using Node.js and Express. Refer to section \ref{sec:backend} for more information.
@@ -241,7 +241,7 @@ The database is used to store all data related to the beehive. It makes the othe
 \section{Implementation}
 
 
-\subsection{Prototype}
+\subsection{\Gls{Prototype}}
 \subsubsection {Hardware} \label{sec:hardware}
 The first step was to build the hardware of the prototype. For this I first had to build the scale itself.
 
@@ -256,7 +256,7 @@ For this I cut out the baseplates from wood according to my technical drawing an
 
 After that, I glued some squares cut from hard plastic and glued them to the baseplate without the load cells at the contact points of the load cells. This is to prevent the load cells from digging into the wood and to make sure that the load cells are not damaged by the wood. I then placed the two plates on top of each other and bolted them together.
 
-I then tested the scale for accuracy and repeatability. I found that the scale was not suited for quick measurements, since it takes a few seconds for the load cells to settle. My guess is that this is due to stress in the wood. However, it is accurate enough for my purposes since I am interested in the change in weight over time, not the absolute weight at a given moment.
+I then tested the scale for accuracy and repeatability and found that the scale was not suited for quick measurements, since it takes a few seconds for the load cells to settle in. My guess is that this is due to stress in the wood. However, it is accurate enough for my purposes since I am interested in the change in weight over time rather than the absolute weight at a given moment.
 
 After this I connected the temperature sensor to the microcontroller. For this, I had to solder a 4.7 k\Omega resistor to the temperature sensor and connect it to the microcontroller as seen in figure \ref{fig:temperature_wiring}. I then tested the temperature sensor and found that it was very accurate.
 
@@ -278,10 +278,10 @@ Simplified, the firmware performs the following steps:
     \item Set configuration values
     \item Establish a connection to the GSM network via the SIM800L module
     \item Set up a connection to the data broker via MQTT
-    \item Initialize the temperature Sensor
+    \item Initialize the temperature sensor
     \item Initialize the load cell amplifier
-    \item Read the Temperature
-    \item Read the Weight
+    \item Read the temperature
+    \item Read the weight
     \item Write the data to the data broker
     \item Disconnect from the data broker
     \item Disconnect from the GSM network
@@ -291,9 +291,12 @@ Simplified, the firmware performs the following steps:
 
 Refer to appendix \ref{lst:firmware} for the full source code of the firmware.
 
+\subsubsection {Data Plan} \label{sec:data_plan}
+The data plan is a subscription to the GSM network that is used to connect the sensor block to the internet. The provider for this subscription is Digitec. The data plan is used to connect the sensor block to the data broker and provides a 0.4 mbit/s uplink and a 0.4 mbit/s down link. This is more than enough to send the data from the sensor block to the data broker since the data packets are only a few bytes in size.
+
 \subsection{Server Setup}
 \subsubsection {Data Broker} \label{sec:data_broker}
-For easy deployment, I decided to use a docker container for the data broker. I used the official Mosquitto docker image and configured it to use a password file for authentication. I also configured it to use TLS encryption. Refer to appendix \ref{lst:mosquitto-conf} for the configuration file and to appendix \ref{lst:mqtt-docker-compose} for the docker compose file.
+For easy deployment, I decided to use a \Gls{Docker} container for the data broker. I used the official Mosquitto docker image and configured it to use a password file for authentication. I also configured it to use \Gls{TLS} encryption. Refer to appendix \ref{lst:mosquitto-conf} for the configuration file and to appendix \ref{lst:mqtt-docker-compose} for the docker compose file.
 
 This broker provides standard MQTT functionality and is used to exchange data between the sensor block and the backend. The sensor block publishes the data to a topic on the broker and the backend subscribes to this topic. This means that the backend automatically gets notified when new data is available and doesn't have to poll the broker for new data.
 
@@ -301,17 +304,17 @@ This broker provides standard MQTT functionality and is used to exchange data be
 The backend persists the data coming from the data broker and makes it available to the user interface. It is implemented using Node.js and Express. It uses the MQTT.js library to connect to the data broker and uses Sequelize to interact with the database. Refer to appendix \ref{sec:backend} for the relevant source code of the backend.
 
 \textbf{Node.js} is a JavaScript runtime that allows to run JavaScript code outside the browser. This makes it possible to implement server side code in JavaScript. It also provides a package manager that allows to easily install and manage dependencies called NPM (Node Packet Manager). In this project, Node is used to handle incoming HTTP requests and to interact with the database. 
-It exposes an API that allows to query the database and to retrieve the data to be displayed in the user interface. There are also endpoints that allow to update the configuration of the beehive. This includes a server side method to calibrate the scale and set a zero offset. Refer to appendix \ref{lst:app.js} for the relevant source code of the backend.
+It exposes an API that allows querying of the database and to retrieve the data to be displayed in the user interface. There are also endpoints that allow to update the configuration of the beehive. This includes a server side method to calibrate the scale and set a zero offset. Refer to appendix \ref{lst:app.js} for the relevant source code of the backend.
 
-\textbf{Express.js} is a web framework for Node.js that allows to easily implement HTTP endpoints. It provides a simple API to define the endpoints and to handle incoming requests. It also provides a middleware system that allows to easily add functionality to the endpoints. Express.js provides an easy way to implement backend routing and greatly simplifies the code structure and the endpoint management.
+\textbf{Express.js} is a web framework for Node.js that allows  easy implementation of \Gls{HTTP} \gls{Endpoint}. It provides a simple \Gls{API} to define the endpoints and to handle incoming requests. It also provides a \Gls{Middleware} system that allows to easily add functionality to the endpoints. Express.js provides an easy way to implement backend routing and greatly simplifies the code structure and the endpoint management.
 
-\textbf{Sequelize} is an ORM (Object Relational Mapper) that allows to interact with the database using JavaScript objects. It provides a simple API to define the database schema and to interact with the database. It also provides a migration system that allows to easily update the database schema. This is useful for example when new data is added to the database or when the data format changes. It also allows to easily query the database and to retrieve the data in a format that is easy to use in the user interface without having to write any SQL queries. Refer to appendix \ref{lst:database.js} for the database schema.
+\textbf{Sequelize} is an \Gls{ORM} which is used for easy interaction with the database using JavaScript objects. It provides a simple API to define the database schema and to interact with the database. It also provides a migration system that allows to easily update the database schema. This is useful for example when new data is added to the database or when the data format changes. It also allows to easily query the database and to retrieve the data in a format that is easy to use in the user interface without having to write any SQL queries. Refer to appendix \ref{lst:database.js} for the database schema.
 Sequelize adds the "createdAt" and "updatedAt" field to any data entry by default and automatically updates them when the data is changed. This further simplifies the backend code.
 
-\textbf{MQTT.js} is a library that allows to connect to an MQTT broker and to subscribe to topics. It also provides an API to publish data to a topic. It is used to connect to the data broker and to subscribe to the topic that the sensor block publishes to. The backend is then automatically notified when new data is available and can act accordingly.
+\textbf{MQTT.js} is a library that is used to connect to an MQTT broker and to subscribe to topics. It also provides an API to publish data to a topic. It is used to connect to the data broker and to subscribe to the topic that the sensor block publishes to. The backend is then automatically notified when new data is available and can act accordingly.
 
 \textbf{Networking}
-The backend and the frontend are intended to be deployed on the same machine. To simplify the port management, a reverse proxy is used to route all API requests to the backend and all other requests to the frontend. This is done using the Angular reverse proxy. This allows the machine to only expose port 80 and 443 to the internet and handle the rest internally making it easier to implement TLS encryption.
+The backend and the frontend are intended to be deployed on the same machine. To simplify the port management, a \gls{Reverse Proxy} is used to route all API requests to the backend and all other requests to the frontend. This is done using the Angular reverse proxy. This allows the machine to only expose \gls{Port} 80 and 443 to the internet and handle the rest internally making it easier to implement TLS encryption.
 
 \subsubsection {Database} \label{sec:database}
 The database is used to store data related to the project. It is implemented using PostgreSQL and is managed using Sequelize. It is running in a docker container and is exposed to the backend via a docker network making it easy to deploy and manage. The same docker container is also running an Adminer instance that allows to easily manage the database. Refer to appendix \ref{lst:database-docker-compose.yml} for the docker compose file.
@@ -323,11 +326,11 @@ The database is used to store data related to the project. It is implemented usi
     \label{fig:database}
 \end{figure}
 
-The database schema is quite simple. It consists of three tables that store the relevant data.
+The database schema is fairly simple. It consists of three tables that store the relevant data.
 
-\textbf{Temperatures} and \textbf{Weights} store the data coming from the sensors. They both have a \textbf{value} field that stores the actual data and a \textbf{createdAt} field that stores the timestamp when the data was created. The \textbf{updatedAt} field is automatically updated by Sequelize when the data is changed. This means that the data can be queried by the backend using the \textbf{createdAt} field and the backend can easily determine the time difference between two data points. They also both have a \textbf{hiveId} field that stores the ID of the beehive that the data belongs to. This allows for multiple beehives to be connected to the same database.
+\textbf{Temperatures} and \textbf{Weights} store the data coming from the sensors. They both have a \textbf{value} field that stores the actual data and a \textbf{createdAt} field that stores the \Gls{Timestamp} when the data was created. The \textbf{updatedAt} field is automatically updated by Sequelize when the data is changed. This means that the data can be queried by the backend using the \textbf{createdAt} field and the backend can easily determine the time difference between two data points. They also both have a \textbf{hiveId} field that stores the ID of the beehive that the data belongs to. This allows for multiple beehives to be connected to the same database.
 
-The \textbf{Hives} database stores information about a given hive. This includes administrative information like among other things a name to tell them apart and a location to determine where they are located. This might be used by a frontend to provide geodata or to collect additional data like weather. It also stores values that are used to calibrate the scale. This includes a \textbf{hiveWeightOffset} field that stores the offset that is used to zero the scale and a \textbf{hiveWeightCalibrationFactor} field that stores a factor used to calibrate the scale. This means that all the information needed to display the data from the beehive is stored on the database and the user interface doesn't have to do any calculations. This also allows the user to change the calibration of the scale at any time without having to do any changes to the scale itself.
+The \textbf{Hives} database stores information about a given hive. This includes administrative information like, among other things, a name to tell them apart and a location to determine where they are located. This might be used by a frontend to provide geodata or to collect additional data like weather. It also stores values that are used to calibrate the scale. This includes a \textbf{hiveWeightOffset} field that stores the offset that is used to zero the scale and a \textbf{hiveWeightCalibrationFactor} field that stores a factor used to calibrate the scale. This means that all the information needed to display the data from the beehive is stored on the database and the user interface doesn't have to do any calculations. This also allows the user to change the calibration of the scale at any time without having to do any changes to the scale itself.
 
 \newpage
 \subsection{User Interface}\label{sec:user_interface}
@@ -335,7 +338,7 @@ The system is designed to make it user interface agnostic. This means that the u
 
 The user interface I've implemented for this project is a simple web application that allows to view the data coming from the beehive. The user is also able to update the configuration of the beehive. This includes a method to calibrate the scale and set a zero offset and therefore provides all the functionality to set up the beehive.
 
-The user interface is implemented using \textbf{Angular} and is deployed using the Angular reverse proxy. This is a bit overkill for this project, but it allows to easily extend the user interface in the future by providing a simple way to add new pages, components and services. For styling, \textbf{TailwindCSS} is used. It provides a simple, low CSS way to style the user interface with a result focused, fast approach.
+The user interface is implemented using \textbf{Angular} and is deployed using the Angular reverse proxy. This is a bit overkill for this project, but it enables it to be easily in the future by providing a simple way to add new pages, components and services. For styling, \textbf{TailwindCSS} is used. It provides a simple, low CSS way to style the user interface with a result focused, fast approach.
 
 \begin{figure}
     \centering
@@ -351,14 +354,14 @@ Testing the system was done by trying to change the measured weight and temperat
 
 The results of those tests showed that the temperature measurements are very accurate and closely match the ambient temperature. There were no sudden inaccuracies or spikes in the temperature measurements. 
 
-The weight measurements however showed a great degree of uncertainty and drift. The weight would drift up and down by several hundred grams without any changes to the scale itself. These drifts however correlated with other changing factors like temperature or time since the last weight change. This means that the weight measurements are not very accurate and can't be used to determine the weight of the beehive with a high degree of accuracy. This is most likely due to the fact that the scale is built from natural wood that experiences internal stresses and changes in weight over time \cite{wood_deformation}. Another potential error sources are the load cells themselves. Load cells are known for being influenced by temperature changes \cite{loadcell_temperature}. This effect is even greater on cheap, consumer grade load cells.
+The weight measurements however showed a great degree of uncertainty and drift. The weight would drift up and down by several hundred grams without any changes to the scale itself. These drifts however correlated with other changing factors like temperature or time since the last weight change. This means that the weight measurements are not very accurate and can't be used to determine the weight of the beehive with a high degree of accuracy. This is most likely due to the fact that the scale is built from natural wood that experiences internal stresses and changes in weight over time \cite{wood_deformation}. Another potential error source are the load cells themselves. Load cells are known for being influenced by temperature changes \cite{loadcell_temperature}. This effect is even greater on cheap, consumer grade load cells.
 
-These inaccuracies can be mitigated in several ways. The wood could be replaced by a more thermally stable material like processed wood, metal or plastic. The inaccuracies of the load cells could be reduced by installing a reference load cell that measures a know weight and using the difference between the theoretical weight and the measured weight to compensate for the temperature changes. This however are not trivial changes and are out of scope for this project and will be left for future work.
+These inaccuracies can be mitigated in several ways. The wood could be replaced by a more thermally stable material like processed wood, metal or plastic. The inaccuracies of the load cells could be reduced by installing a reference load cell that measures a known weight and using the difference between the theoretical weight and the measured weight to compensate for the temperature changes. These however are not trivial changes and are out of the scope for this project and will be left for future work.
 
 \subsection{Power Consumption}
-Power consumption is a very important factor in "off-grid" IOT systems. It determines the choice of power supply that is necessary to power the system.
+Power consumption is a very important factor in "\Gls{Off-Grid}" \Gls{IOT} systems. It determines the choice of power supply that is necessary to power the system.
 
-To measure the power consumption, a USB power meter was hooked in between the power supply and the microcontroller. The power meter was then used to measure the voltage and current draw of the system.
+To measure the power consumption, a USB power meter was hooked in between the power supply and the \gls{Microcontroller}. The power meter was then used to measure the voltage and current draw of the system.
 
 \begin{figure}
     \centering
@@ -369,24 +372,24 @@ To measure the power consumption, a USB power meter was hooked in between the po
 See \ref{lst:power-management} for the data used to generate the graph.
 
 \subsubsection{Methodology}
-The power meter used was a UM34C inline USB power meter. Measures the voltage and current draw of the USB port and saves it to a CSV file. The CSV file was then imported into a spreadsheet and the average current draw was calculated. The average current draw was then multiplied by the voltage to get the average power consumption.
+The power meter used was a UM34C inline USB power meter. Measures the voltage and current draw of the USB port and saves it to a \Gls{CSV} file. The CSV file was then imported into a spreadsheet and the average current draw was calculated. The average current draw was then multiplied by the voltage to get the average power consumption.
 
-The microcontroller was set to instantly restart after it has done one measuring cycle. This was done for a total of 20 cycles. The average current draw was then calculated from the 20 measurements. This was done to reduce the influence of the power supply on the measurements. The power supply used was a 5V 2A power supply. With this information the average power consumption of a single measuring cycle can be calculated.
+The microcontroller was set to instantly restart after it completing one measuring cycle. This was done for a total of 20 cycles. The average current draw was then calculated from the 20 measurements. This was done to reduce the influence of the power supply on the measurements. The power supply used was a 5V 2A power supply. With this information the average power consumption of a single measuring cycle can be calculated.
 
-The deep sleep current was too low to be measured by the power meter. Therefore, 150\mu A given in the datasheet \cite{espressif_esp32} was used. 
+The deep sleep current was too low to be measured by the power meter. Therefore, 150\mu A given in the \gls{Data sheet} \cite{espressif_esp32} was used. 
 
 With an average current draw of 92mA and an average voltage of 5.16V, the average power consumption during a measuring cycle is 0.48W. With a cycle duration of about 30 seconds, the average power consumption per cycle is 0.0158Wh. This means that the system can complete about 770 cycles on a standard 18650 battery with a capacity of 12.2Wh. The power consumption during deep sleep is about 75mW  which is negligible compared to the power consumption during a measuring cycle. Those numbers show that the battery life of the system is limited by the battery capacity and the frequency of the measuring cycles.
 
-With a setup of 4 18650 batteries and a cycle frequency of 1 cycle every 10 minutes, the system can run for about 21.4 days before the batteries need to be replaced. If we only take measurements every hour, which is what most beekeepers do, the system can run for about 128 days which means that the batteries only need to be replaced three times a year.
+With a setup of 4 \Gls{18650} batteries and a cycle frequency of 1 cycle every 10 minutes, the system can run for about 21.4 days before the batteries need to be replaced. If we only take measurements every hour, which is what most beekeepers do, the system can run for about 128 days which means that the batteries only need to be replaced three times a year.
 
 Adding solar panels to the system would enable it to run indefinitely. With a 10-minute measuring frequency, the system would have to be in direct sunlight every 21 days to keep the batteries charged. This should be more than enough for most beekeepers and would be a great future improvement to the system.
 
 
 \subsection{Software Testing}
-Due to the simplicity of the software, no automated testing were done. The software was tested manually by trying to interact with it and observing the results. The results were then compared to the expected results.
+Due to the simplicity of the software, no automated testing was done. The software was tested manually by trying to interact with it and observing the results. The results were then compared to the expected results.
 
 \subsubsection{Data Broker}
-The data broker was tested with the \textbf{MQTT Explorer} client. This allows to connect to the broker directly and see what data is being published. This also allows to verify the TLS authentication. The network traffic was also monitored to verify that the data is being encrypted and no plain text information like usernames and passwords are being sent over the network unencrypted.
+The data broker was tested with the \textbf{MQTT Explorer} \Gls{Client}. This allows to connect to the broker directly and see what data is being published. This also provides a way to verify the TLS authentication. The network traffic was also monitored to verify that the data is being encrypted and no plain text information like usernames and passwords are being sent over the network unencrypted.
 
 The broker satisfied all the requirements and was therefore considered to be working correctly.
 
@@ -406,4 +409,3 @@ The user interface was tested by using it to interact with the system and testin
 The user interface was also tested on different devices to verify that it is responsive and works correctly on different screen sizes.
 
 The user interface satisfied all the requirements and was therefore considered to be working correctly.
-\Gls{BibTeX}
