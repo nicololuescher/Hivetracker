@@ -25,14 +25,14 @@
 #define GSM_PIN "2827"
 
 // gprs credentials for digitec iot
-const char apn[] = "internet";
-const char gprsUser[] = "internet";
-const char gprsPass[] = "guest";
+const char apn[] = "apn";
+const char gprsUser[] = "user";
+const char gprsPass[] = "password";
 
 // mqtt broker
-const char *broker = "mqtt.nicolo.info";
-const char *mqttUser = "guest";
-const char *mqttPassword = "gibbiX12345";
+const char *broker = "mqttbroker";
+const char *mqttUser = "mqttuser";
+const char *mqttPassword = "mqttpassword";
 
 // configuration
 const int baudRate = 115200;
